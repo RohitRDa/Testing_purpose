@@ -1,0 +1,15 @@
+Hi Ram,
+
+I hope this message finds you well. I am writing to address an unintentional error on my part regarding the exposure of email IDs on a Git repository.
+
+Regrettably, I inadvertently uploaded an email list to a public Git repository. This was clearly a mistake and does not align with our data security protocols. I take full responsibility for this oversight and sincerely apologize for any inconvenience or concern this may have caused.
+
+I want to assure you that immediate action has been taken to rectify the situation. The repository containing the email IDs has been promptly removed from the public domain to prevent any further access or distribution of the information.
+
+Additionally, I have successfully removed the GitHub repository "RohitRDa/Dev" where I had inadvertently uploaded code for personal testing. I want to clarify that I do not upload any code from my [Company Name] account to external repositories. The code I uploaded was for testing purposes and did not contain sensitive information beyond what I mentioned, such as S IDs.
+
+I apologize again for any oversight and appreciate your understanding as I continue to prioritize data security and privacy in my work.
+
+Please let me know if you have any further questions or concerns regarding this matter.
+
+Thank you for your attention to this issue.
