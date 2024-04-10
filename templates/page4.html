@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    a.edit-link {
+        text-decoration: none;
+        color: blue;
+    }
+</style>
+
+
+<h1 style="text-align: center; position: fixed; background-color: #d1cdcd; width: 80%; padding: 1px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">Index 4</h1>
+
+<br><br><br>
+
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Country</th>
+        <th>Date and Time</th>
+        <th>Subscribe to Newsletter</th>
+        <th>I Agree to Terms and Conditions</th>
+        <th>Edit</th>
+    </tr>
+    {% for entry in data %}
+    <tr>
+        <td>{{ entry['username'] }}</td>
+        <td>{{ entry['email'] }}</td>
+        <td>{{ entry['phone'] }}</td>
+        <td>{{ country_names[entry['country']] }}</td>
+        <td>{{ entry['datetime'] }}</td>
+        <td>{% if entry['subscribe_to_newsletter'] == 'Yes' %}Yes{% else %}No{% endif %}</td>
+        <td>{% if entry['agree_to_terms'] == 'Yes' %}Yes{% else %}No{% endif %}</td>
+        <td><a class="edit-link" href="{{ url_for('edit_entry', user_id=entry['user_id']) }}">Edit</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

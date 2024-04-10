@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .checkbox {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    /* Style for checkboxes */
+    label.checkbox {
+        display: flex;
+        align-items: inherit;
+    }
+
+    label.checkbox input {
+        margin-left: 10px;
+    }
+
+    button {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+    .success-message {
+        color: green;
+        font-weight: bold;
+    }
+</style>
+
+<h1>Edit Entry</h1>
+
+<form method="POST" action="{{ url_for('edit_entry', user_id=entry['user_id']) }}">
+    <label for="username">Username:</label>
+    <input type="text" name="username" value="{{ entry['username'] }}" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{{ entry['email'] }}" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" name="phone" value="{{ entry['phone'] }}" required>
+
+    <label for="country">Country:</label>
+    <select name="country">
+        <option value="option1" {% if entry['country'] == "option1" %}selected{% endif %}>USA</option>
+        <option value="option2" {% if entry['country'] == "option2" %}selected{% endif %}>India</option>
+        <option value="option3" {% if entry['country'] == "option3" %}selected{% endif %}>Canada</option>
+    </select>
+
+    <label for="datetime">Date:</label>
+    <div class="input-group">
+        <input type="text" name="datetime" id="date-time-input" class="date-time-field" value="{{ entry['formatted_datetime'] }}" required>
+        <button type="button" onclick="showDatePicker()" class="btn-icon">&#128197;</button>
+    </div>
+    <div id="date-picker-container" style="display: none;">
+        <input id="date-picker" type="date" onchange="updateDate()" />
+    </div>
+    
+    
+    <label for="subscribe_to_newsletter" class="checkbox">
+        Subscribe to Newsletter:
+        <input type="checkbox" name="subscribe_to_newsletter" {% if entry['subscribe_to_newsletter'] == 'Yes' %}checked{% endif %} value="Yes">
+    </label>
+    
+    <label for="agree_to_terms" class="checkbox">
+        I Agree to Terms and Conditions:
+        <input type="checkbox" name="agree_to_terms" {% if entry['agree_to_terms'] == 'Yes' %}checked{% endif %} value="Yes">
+    </label>
+    
+
+    <button type="submit">Save</button>
+</form>
+<script>
+    function showDatePicker() {
+        const datePickerContainer = document.getElementById("date-picker-container");
+        datePickerContainer.style.display = "block";
+    }
+
+    function updateDate() {
+        const datePicker = document.getElementById("date-picker");
+        const dateTimeInput = document.getElementById("date-time-input");
+
+        if (datePicker.value) {
+            dateTimeInput.value = formatDate(new Date(datePicker.value));
+
+            const datePickerContainer = document.getElementById("date-picker-container");
+            datePickerContainer.style.display = "none";
+        }
+    }
+
+    function formatDate(inputDate) {
+        const date = new Date(inputDate);
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = getMonthName(date.getMonth());
+        const year = date.getFullYear();
+
+        const formattedDate = `${day}-${month}-${year}`;
+        return formattedDate;
+    }
+
+    function getMonthName(month) {
+        const months = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        return months[month];
+    }
+
+    // Set the initial value of the date picker based on the user's input
+    const dateTimeInput = document.getElementById("date-time-input");
+    const dateValue = dateTimeInput.value;
+    const formattedDate = new Date(dateValue);
+
+    if (!isNaN(formattedDate.getTime())) {
+        const datePicker = document.getElementById("date-picker");
+        datePicker.valueAsDate = formattedDate;
+    }
+</script>
+
+{% endblock %}

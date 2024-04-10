@@ -1,0 +1,311 @@
+<!-- Base layout -->
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src=https://kit.fontawesome.com/9c6dc18d90.js></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+
+    * {
+
+        margin: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
+
+    }
+    .main_box {
+    margin-top: 55px; /* Adjust this margin to ensure content isn't hidden behind the fixed header and sidebar */
+}
+    .main-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+    body {
+
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    }
+
+    .title-container {
+
+        background-color: rgb(40, 87, 87);
+
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+
+    }
+
+    .title-center {
+
+        flex-grow: 1;
+
+        text-align: center;
+
+    }
+
+    .user-info, .sign-out {
+
+        display: flex;
+
+        align-items: center;
+
+        font-weight: bold;
+
+    }
+
+    .user-info i, .sign-out i {
+
+        margin-right: 5px;
+
+    }
+
+    .content {
+
+        margin-left: 260px;
+
+        padding: 20px;
+
+        background-color: #fff;
+
+        color: #333;
+
+    }
+
+    .Sidebar_Menu {
+
+        position: fixed;
+
+        display: flex;
+
+        height: 100vh;
+
+        width: 260px;
+
+        margin-top: 0px !important;
+
+        background-color: rgb(40, 87, 87);
+
+    }
+
+    .Sidebar_Menu .menu {
+
+        position: absolute;
+
+        top: 0px !important;
+
+        width: 100%;
+
+        margin-top: 2px !important;
+
+    }
+
+    .Sidebar_Menu .menu ul {
+
+        list-style-type: none;
+
+        padding: 0;
+
+    }
+
+    .Sidebar_Menu .menu li {
+
+        padding: 16px 25px;
+
+        cursor: pointer;
+
+        transition: background-color 0.3s ease;
+
+    }
+
+    .Sidebar_Menu .menu li:cli {
+
+        background-color: #cd3e3e;
+
+    }
+
+    .Sidebar_Menu .menu a {
+
+        color: white;
+
+        font-size: 16px;
+
+        display: flex;
+
+        text-decoration: none;
+
+    }
+
+    .Sidebar_Menu .menu i {
+
+        color: white;
+
+        font-size: 16px;
+
+        padding-right: 20px;
+
+    }
+
+    .header-right {
+    display: flex;
+    align-items: center;
+}
+.header-right span {
+    margin-right: 10px;
+}
+.header-right button {
+    background-color: #061277;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+.header-right button:hover {
+    background-color: #f50000;
+}
+
+#alert-container {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 1;
+}
+
+#alert-container {
+position: absolute;
+top: 50px; /* Adjust the top value to position the alert relative to the header */
+left: 0;
+width: 100%;
+z-index: 1;
+}
+
+.alert {
+color: red;
+font-weight: bold;
+animation: slideIn 2s linear;
+}
+
+@keyframes slideIn {
+0% {
+    transform: translateX(-100%);
+}
+100% {
+    transform: translateX(0);
+}
+}
+
+
+</style>
+
+<body>
+
+
+  <div class="title-container">
+
+    <div class="title-center">
+
+        <h1>Test</h1>
+
+    </div>
+
+    <div class="user-info">
+
+        <i class="fas fa-user"></i>
+
+        <span>USER</span>
+
+    </div>&nbsp;&nbsp;&nbsp;
+
+    <div class="header-right">
+        <span id="username-placeholder"></span>
+        <button id="logout-button" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+</div>
+
+<div class="main_box">
+    <div class="Sidebar_Menu">
+        <div class="menu">
+            <ul>
+                <!-- Main menu items -->
+                <li>
+                    <a href="{{ url_for('page1') }}"><i class="fas fa-database"></i>Home</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('page1') }}"><i class="fas fa-tasks"></i>Index- 1</a>
+                </li>
+                <!-- Sub-menu for Index-1 -->
+                <li>
+                    <a href="#" class="sub-menu-toggle">
+                        <i class="fas fa-caret-down"></i>  Submenu
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ url_for('page2') }}"><i class="fas fa-file-alt"></i>Index- 2</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('page3') }}"><i class="fas fa-chart-line"></i>Index- 3</a>
+                        </li>
+                        <!-- You can add more sub-menu items here -->
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ url_for('page4') }}"><i class="fas fa-chart-line"></i>Index- 4</a>
+                </li>
+                <!-- Add more main menu items if needed -->
+            </ul>
+        </div>
+    </div>
+
+
+  
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+  <script>
+    $('.sidebar a').click(function(e) {
+  e.preventDefault();
+  
+  let url = $(this).attr('href'); 
+  loadPage(url); 
+})
+
+function loadPage(url) {
+  $.get(url, function(response) {
+    $('.content').html(response);
+  });
+}
+
+$('.sub-menu-toggle').on('click', function() {
+
+ $(this).siblings('.sub-menu').slideToggle();
+  });
+
+            
+  </script>
+
+  
+
+</body>
+</html>

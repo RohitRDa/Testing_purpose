@@ -1,0 +1,5 @@
+user_id,username,email,phone,country,subscribe_to_newsletter,agree_to_terms,datetime,formatted_datetime
+1697486075.9008737,admin,amarraj060@gmail.com,07696807602,option2,Yes,Yes,2023-10-09,09-Oct-2023
+1697487631.651501,hp,amarraj060@gmail.com,07696807602,option2,Yes,No,2023-10-17,17-Oct-2023
+1697559368.7412236,rohit.dogra,amarraj060@gmail.com,07696807602,option2,Yes,No,2023-10-17,17-Oct-2023
+1697563074.537527,rohan,rohan@gmail.com,1234567899,option1,No,Yes,2023-10-17,

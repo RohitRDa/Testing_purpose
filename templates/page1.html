@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style="text-align: center; position: fixed; background-color: #d1cdcd; width: 80%; padding: 1px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">Insert Data</h1>
+<br>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .checkbox {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    /* Style for checkboxes */
+    label.checkbox {
+        display: flex;
+        align-items: inherit;
+    }
+
+    label.checkbox input {
+        margin-left: 10px;
+    }
+
+    button {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #555;
+    }
+
+    .success-message {
+        color: green;
+        font-weight: bold;
+    }
+    .container {
+            padding: 20px;
+        }
+        
+        .container button {
+            background-color: #128197;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .date-picker-container {
+            display: none;
+        }
+        .btn-icon {
+    padding: 0px 10px; /* Adjust padding to move the button closer to the input field */
+    float: right; /* Align the button to the right */
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+</style>
+
+</head>
+<body>
+    <br><br><br>
+<h1 style="text-align: center;">Index - 1</h1>
+<form method="POST" action="{{ url_for('page1') }}">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" name="phone" required>
+
+    <label for="dropdown">Country:</label>
+    <select name="country">
+        <option value="option1">---Select---</option>
+        <option value="option1">USA</option>
+        <option value="option2">India</option>
+        <option value="option3">Canada</option>
+    </select>
+
+    <label for="datetime">Date:</label>
+    <input type="text" name="datetime" id="date-input" class="date-field" required>
+
+    <button type="button" onclick="showDateTimePicker()" class="btn-icon">&#128197;</button>
+
+    <div id="datetime-picker" class="date-picker-container">
+        <input id="date-picker" type="date" onchange="updateDate()" />
+    </div>
+    
+    
+    
+
+    <!-- Meaningful label for the checkbox -->
+    <label for="subscribe_to_newsletter" class="checkbox">Subscribe to Newsletter:<input type="checkbox" id="subscribe_to_newsletter" name="subscribe_to_newsletter"></label>
+    
+
+    <label for="coding" class="checkbox">I Agree term and condtion: <input type="checkbox" id="coding" name="interest" value="coding"> </label>
+    
+    <button type="submit">Submit</button>
+</form>
+<script>
+    function updateDate() {
+        const datePicker = document.getElementById("date-picker");
+        const dateInput = document.getElementById("date-input");
+
+        if (datePicker.value) {
+            dateInput.value = formatDate(new Date(datePicker.value));
+
+            const datetimePicker = document.getElementById("datetime-picker");
+            datetimePicker.style.display = "none";
+        }
+    }
+
+    function showDateTimePicker() {
+        const datePickerContainer = document.querySelector(".date-picker-container");
+        datePickerContainer.style.display = "block";
+    }
+
+    function formatDate(date) {
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = getMonthName(date.getMonth());
+        const year = date.getFullYear();
+
+        const formattedDate = `${day}-${month}-${year}`;
+        return formattedDate;
+    }
+
+    function getMonthName(month) {
+        const months = [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        return months[month];
+    }
+</script>
+{% if success_message %}
+<div class="success-message">
+    {{ success_message }}
+</div>
+{% endif %}
+
+</body>
+
+{% endblock %}

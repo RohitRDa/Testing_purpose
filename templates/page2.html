@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center; position: fixed; background-color: #d1cdcd; width: 80%; padding: 1px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">Fetch-data</h1>
+
+<br> <br>
+  <br>
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #333;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    tr:hover {
+        background-color: #ccc;
+    }
+</style>
+</head>
+<body>
+<h1>Index - 2</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Country</th>
+            
+            <th>Date and Time</th>
+            <th>Subscribe to Newsletter</th>
+            <th>Agree to Terms</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td>{{ row['username'] }}</td>
+            <td>{{ row['email'] }}</td>
+            <td>{{ row['phone'] }}</td>
+            <td>{{ country_names[row['country']] }}</td>
+            <td>{{ row['datetime'] }}</td>
+            <td>
+                {% if row['subscribe_to_newsletter'] == 'Yes' %}Yes{% else %}No{% endif %}
+            </td>
+            <td>
+                {% if row['agree_to_terms'] == 'Yes' %}Yes{% else %}No{% endif %}
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+{% with messages = get_flashed_messages() %}
+{% if messages %}  
+  {% for message in messages %}
+    <p style="color: green;">{{ message }}</p>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+</body>
+{% endblock %}
