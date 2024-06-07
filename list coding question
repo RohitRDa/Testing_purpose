@@ -157,3 +157,41 @@ Adding an element to the start: Create a new list starting with the new element 
 Adding an element to the end: Create a new list with the original list elements followed by the new element.
 Adding an element to the middle: Determine the middle index, then create a new list with elements before the middle, add the new element, and finally add the remaining elements.
 These approaches maintain the integrity of the original list while achieving the desired modifications.
+
+////////////////////////////////////////////////without * //////////////////////////////////////////////////////////////////////////////
+
+def multiply_without_operator(a, b):
+    # Initialize the result to 0
+    result = 0
+    
+    # Handle negative numbers
+    is_negative = (a < 0) != (b < 0)
+    a, b = abs(a), abs(b)
+    
+    # Add 'a' to the result 'b' times
+    for _ in range(b):
+        result += a
+    
+    # If the result should be negative, negate it
+    if is_negative:
+        result = -result
+    
+    return result
+
+# Example usage:
+a = 5
+b = 3
+print("Result:", multiply_without_operator(a, b))  # Output: 15
+
+a = -5
+b = 3
+print("Result:", multiply_without_operator(a, b))  # Output: -15
+
+a = 5
+b = -3
+print("Result:", multiply_without_operator(a, b))  # Output: -15
+
+a = -5
+b = -3
+print("Result:", multiply_without_operator(a, b))  # Output: 15
+
