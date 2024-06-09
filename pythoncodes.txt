@@ -1,0 +1,78 @@
+### Approach 1: Using List Concatenation
+##
+##def add_element(orginal_list,first_element,last_element):
+##    return [first_element]+orginal_list+[last_element]
+##
+##lst=[2,3,4]
+##element1=1
+##element2=5
+##result=add_element(lst,element1,element2)
+##print("This is correct anser",result[::-1])
+##
+##
+### Approach 2: Using List Slicing
+
+##def add_element_scling(orginal_list,first_element,last_element):
+##    new_lst=[first_element]
+##    new_lst+=orginal_list[:]
+##    new_lst+=[last_element]
+##
+##    return new_lst
+##
+##lst=[2,3,4]
+##element1=1
+##element2=5
+##result=add_element_scling(lst,element1,element2)
+##print(result)
+
+#o add an element in the middle of a list using an inbuilt method, you can utilize list concatenation along with the slice method
+
+##def add_middle(orginal_list,middle_element):
+##    middle_index=len(orginal_list) //2
+##    new_list=orginal_list[:middle_index]+[middle_element]+orginal_list[middle_index:]
+##    return new_list
+##
+##lst=[2,3,4,5]
+##middle=9
+##result=add_middle(lst,middle)
+##print(result)
+
+#o add an element in the middle of a list using an inbuilt method, you can utilize list concatenation along with the slice method
+
+##def add_middle_element(lst,middle_ele):
+##    middle_index=len(lst) //2
+##    lst.insert(middle_index,middle_ele)
+##    return lst
+##lst1=[2,3,4,5]
+##element=9
+##result=add_middle_element(lst1,element)
+##print(result)
+
+
+#To find the common elements in two given lists
+
+##def common_elemnet(list1,list2):
+##    return list(set(list1) & set(list2))
+##
+##lista=[1,2,3,4,5]
+##listb=[6,7,8,5,1]
+##result=common_elemnet(lista,listb)
+##print("this correct answer",result)
+
+
+#To find the common elements in two given lists
+
+def comman_number(lista,listb):
+    commoan_element=[]
+
+    for i in lista:
+        for j in listb:
+            if i==j:
+                if  i not in commoan_element:
+                    commoan_element.append(i)
+    return commoan_element
+
+list1=[10,2,3,4,5,1,'a']
+list2=[6,7,8,5,1,4,10,'a']
+result=comman_number(list1,list2)
+print("this correct answer",result)
