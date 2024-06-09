@@ -62,17 +62,73 @@
 
 #To find the common elements in two given lists
 
-def comman_number(lista,listb):
-    commoan_element=[]
+##def comman_number(lista,listb):
+##    commoan_element=[]
+##
+##    for i in lista:
+##        for j in listb:
+##            if i==j:
+##                if  i not in commoan_element:
+##                    commoan_element.append(i)
+##    return commoan_element
+##
+##list1=[10,2,3,4,5,1,'a']
+##list2=[6,7,8,5,1,4,10,'a']
+##result=comman_number(list1,list2)
+##print("this correct answer",result)
 
-    for i in lista:
-        for j in listb:
-            if i==j:
-                if  i not in commoan_element:
-                    commoan_element.append(i)
-    return commoan_element
+# sorted the given list
 
-list1=[10,2,3,4,5,1,'a']
-list2=[6,7,8,5,1,4,10,'a']
-result=comman_number(list1,list2)
-print("this correct answer",result)
+##def sort_list(list1):
+##
+##    n=len(list1)
+##
+##    for i in range(n):
+##
+##        for j in range(0,n-i-1):
+##            if list1[j]>list1[j+1]:
+##                list1[j],list1[j+1]=list1[j+1],list1[j]
+##
+##    return list1
+##
+##lista=[44,55,2,7,1,100]
+##result=sort_list(lista)
+##print("this is sorted is : ",result)
+
+def unsort(list1):
+    return sorted(list1)
+
+
+lista=[44,55,2,7,1,100]
+result=unsort(lista)
+print("this is sorted is : ",result)
+
+
+/////////////////////////////////////////////////
+
+def process_list(lst):
+    element_count = {}
+    duplicates = []
+
+    # Count occurrences of each element
+    for element in lst:
+        if element in element_count:
+            element_count[element] += 1
+        else:
+            element_count[element] = 1
+
+    # Identify duplicates and print their counts
+    for element, count in element_count.items():
+        if count > 1:
+            duplicates.append((element, count))
+            print(f"Element '{element}' occurs {count} times")
+
+    # Create a new list with duplicates removed
+    new_list = list(element_count.keys())
+
+    print(f"New list after removing duplicates: {new_list}")
+    return new_list
+
+# Example usage:
+original_list = [64, 34, 25, 12, 22, 11, 90, 64, 25, 25, 12]
+new_list = process_list(original_list)
