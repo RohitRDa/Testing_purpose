@@ -1,4 +1,7 @@
 Python Code Questions and Answers
+
+
+
 1. Add elements to a list using different approaches
 Question:
 How do you add elements to the beginning and end of a list using list concatenation and slicing methods?
@@ -30,6 +33,9 @@ element1 = 1
 element2 = 5
 result = add_element_slicing(lst, element1, element2)
 print(result)
+
+
+
 2. Add an element to the middle of a list
 Question:
 How do you add an element in the middle of a list using slicing and insert method?
@@ -60,6 +66,9 @@ lst1 = [2, 3, 4, 5]
 element = 9
 result = add_middle_element(lst1, element)
 print(result)
+
+
+
 3. Find common elements in two lists
 Question:
 How do you find the common elements in two given lists?
@@ -92,6 +101,9 @@ list1 = [10, 2, 3, 4, 5, 1, 'a']
 list2 = [6, 7, 8, 5, 1, 4, 10, 'a']
 result = common_number(list1, list2)
 print("This is the correct answer", result)
+
+
+
 4. Find the second highest number in a list
 Question:
 How do you find the second highest number in a list?
@@ -115,6 +127,9 @@ def s_h(numbers):
 list = [1, 2, 3, 4, 5, 66, 1, 3, 4, 9, 10]
 result = s_h(list)
 print("This second highest number", result)
+
+
+
 5. Remove duplicates from a list
 Question:
 How do you remove duplicates from a list?
@@ -131,6 +146,10 @@ def unique_numbers(numbers):
 nums = [1, 1, 1, 2, 3, 3, 4, 2, 5, 6, 5, 7, 8, 9, 4, 6, 8]
 unique_nums = unique_numbers(nums)
 print(unique_nums)
+
+
+
+
 6. Count the frequency of each element in a list
 Question:
 How do you count the frequency of each element in a list?
@@ -149,6 +168,9 @@ def count_of_element(numbers):
 nums = [1, 2, 3, 4, 5, 66, 6, 5, 1, 7, 7, 5, 10, 1, 1, 'a', 'a', '']
 result = count_of_element(nums)
 print(result)
+
+
+
 7. Find the largest element in a list
 Question:
 How do you find the largest element in a list?
@@ -165,6 +187,9 @@ def largest_num(numbers):
 number = [16, 2, 9, 67, 6, 88]
 result = largest_num(number)
 print(result)
+
+
+
 8. Find the factorial of a number
 Question:
 How do you find the factorial of a number?
@@ -179,6 +204,9 @@ def fact(n):
 
 num = 5
 print(fact(num))
+
+
+
 9. Perform multiplication of two numbers without using the multiplication operator
 Question:
 How do you perform multiplication of two numbers without using the multiplication operator?
@@ -201,6 +229,9 @@ def multiple_operation(a, b):
 a = 15
 b = -3
 print(multiple_operation(a, b))
+
+
+
 10. Reverse a list
 Question:
 How do you reverse a list?
@@ -218,6 +249,9 @@ def reverse(list1):
 
 lista = ['a', 'b', 1, 2, 3]
 print(reverse(lista))
+
+
+
 11. Count the duplicates in a list and create a new list without duplicates
 Question:
 How do you count the duplicates in a list and create a new list without duplicates?
@@ -246,6 +280,8 @@ def count_and_remove_duplicates(list1):
 lista = [1, 2, 3, 4, 5, 1, 5, 5, 10, 101, 101, 101]
 result = count_and_remove_duplicates(lista)
 print(result)
+
+
 12. Find the index of an element in a list
 Question:
 How do you find the index of an element in a list?
@@ -262,6 +298,8 @@ list1 = [1, 2, 3, 4, 55, 6, 77]
 ele1 = 55
 result = find_element_index(list1, ele1)
 print(f"K element '{ele1}' is present at index: {result}")
+
+
 13. Find two numbers in a list that add up to a target value
 Question:
 How do you find two numbers in a list that add up to a target value?
@@ -325,3 +363,33 @@ print(result)
 /////////////////////////////////////////////////////////
 
 
+##def count_vowels(s):
+##    vowels = "aeiouAEIOU"
+##    vowel_count = 0
+##    for char in s:
+##        if char in vowels:
+##            vowel_count += 1
+##    return vowel_count
+##
+##input_string = "mamu aaoA!"
+##print(f"The Anumber of vowels in the input string is: {count_vowels(input_string)}")
+
+
+
+
+14) orrectly count the occurrences of each vowel in the input string, both uppercase and lowercase
+
+
+
+def count_vowels(s):
+    vowels = "aeiouAEIOU"
+    vowel_count = {vowel: 0 for vowel in vowels}
+    for char in s:
+        if char in vowels:
+            vowel_count[char] += 1
+    return vowel_count
+
+input_string = "Umamu aaoAIUEII!"
+vowel_counts = count_vowels(input_string)
+print("Vowel counts in the input string:")
+print(vowel_counts)
