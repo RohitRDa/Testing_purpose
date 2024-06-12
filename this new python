@@ -279,3 +279,49 @@ lst1 = [6, 1, 2, 3, 4, 5]
 target = 7
 result = two_sum(lst1, target)
 print(result)
+
+
+
+Here is the corrected version of the two_sum function. I fixed the indentation issues, ensured that the logic for appending to the result list works correctly, and also made sure that the dictionary updates properly.
+
+python
+Copy code
+def two_sum(lst, k):
+    dict1 = {}
+    res = []
+
+    for i, element in enumerate(lst):
+        diff = k - element
+        if diff in dict1:
+            for prev_index in dict1[diff]:
+                res.append([prev_index, i])
+        if element not in dict1:
+            dict1[element] = []
+        dict1[element].append(i)
+    
+    return res if res else None
+
+list1 = [1, 6, 2, 3, 4, 5]
+k1 = 7
+result = two_sum(list1, k1)
+print(result)
+
+//////////////////////////////////////
+
+
+def two_sum(lst, k):
+    pairs = []
+    for i, num1 in enumerate(lst):
+        for j, num2 in enumerate(lst[i + 1:], start=i + 1):
+            if num1 + num2 == k:
+                pairs.append((i, j))
+    return pairs
+
+lst1 = [6, 1, 2, 3, 4, 5]
+target = 7
+result = two_sum(lst1, target)
+print(result)
+
+/////////////////////////////////////////////////////////
+
+
