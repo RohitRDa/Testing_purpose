@@ -1,0 +1,281 @@
+Python Code Questions and Answers
+1. Add elements to a list using different approaches
+Question:
+How do you add elements to the beginning and end of a list using list concatenation and slicing methods?
+
+Approach 1: Using List Concatenation
+
+ 
+ 
+def add_element(original_list, first_element, last_element):
+    return [first_element] + original_list + [last_element]
+
+lst = [2, 3, 4]
+element1 = 1
+element2 = 5
+result = add_element(lst, element1, element2)
+print("This is the correct answer", result[::-1])
+Approach 2: Using List Slicing
+
+ 
+ 
+def add_element_slicing(original_list, first_element, last_element):
+    new_lst = [first_element]
+    new_lst += original_list[:]
+    new_lst += [last_element]
+    return new_lst
+
+lst = [2, 3, 4]
+element1 = 1
+element2 = 5
+result = add_element_slicing(lst, element1, element2)
+print(result)
+2. Add an element to the middle of a list
+Question:
+How do you add an element in the middle of a list using slicing and insert method?
+
+Using Slicing:
+
+ 
+ 
+def add_middle(original_list, middle_element):
+    middle_index = len(original_list) // 2
+    new_list = original_list[:middle_index] + [middle_element] + original_list[middle_index:]
+    return new_list
+
+lst = [2, 3, 4, 5]
+middle = 9
+result = add_middle(lst, middle)
+print(result)
+Using Insert Method:
+
+ 
+ 
+def add_middle_element(lst, middle_ele):
+    middle_index = len(lst) // 2
+    lst.insert(middle_index, middle_ele)
+    return lst
+
+lst1 = [2, 3, 4, 5]
+element = 9
+result = add_middle_element(lst1, element)
+print(result)
+3. Find common elements in two lists
+Question:
+How do you find the common elements in two given lists?
+
+Using Set Intersection:
+
+ 
+ 
+def common_element(list1, list2):
+    return list(set(list1) & set(list2))
+
+lista = [1, 2, 3, 4, 5]
+listb = [6, 7, 8, 5, 1]
+result = common_element(lista, listb)
+print("This is the correct answer", result)
+Using Nested Loops:
+
+ 
+ 
+def common_number(lista, listb):
+    common_element = []
+    for i in lista:
+        for j in listb:
+            if i == j:
+                if i not in common_element:
+                    common_element.append(i)
+    return common_element
+
+list1 = [10, 2, 3, 4, 5, 1, 'a']
+list2 = [6, 7, 8, 5, 1, 4, 10, 'a']
+result = common_number(list1, list2)
+print("This is the correct answer", result)
+4. Find the second highest number in a list
+Question:
+How do you find the second highest number in a list?
+
+ 
+ 
+def s_h(numbers):
+    if not numbers or len(numbers) < 2:
+        return None, None
+    highest = second_highest = None
+
+    for number in numbers:
+        if highest is None or number > highest:
+            second_highest = highest
+            highest = number
+        elif second_highest is None or (number > second_highest and number != highest):
+            second_highest = number
+
+    return second_highest
+
+list = [1, 2, 3, 4, 5, 66, 1, 3, 4, 9, 10]
+result = s_h(list)
+print("This second highest number", result)
+5. Remove duplicates from a list
+Question:
+How do you remove duplicates from a list?
+
+ 
+ 
+def unique_numbers(numbers):
+    unique_nums = []
+    for num in numbers:
+        if num not in unique_nums:
+            unique_nums.append(num)
+    return unique_nums
+
+nums = [1, 1, 1, 2, 3, 3, 4, 2, 5, 6, 5, 7, 8, 9, 4, 6, 8]
+unique_nums = unique_numbers(nums)
+print(unique_nums)
+6. Count the frequency of each element in a list
+Question:
+How do you count the frequency of each element in a list?
+
+ 
+ 
+def count_of_element(numbers):
+    frequency = {}
+    for num in numbers:
+        if num in frequency:
+            frequency[num] += 1
+        else:
+            frequency[num] = 1
+    return frequency
+
+nums = [1, 2, 3, 4, 5, 66, 6, 5, 1, 7, 7, 5, 10, 1, 1, 'a', 'a', '']
+result = count_of_element(nums)
+print(result)
+7. Find the largest element in a list
+Question:
+How do you find the largest element in a list?
+
+ 
+ 
+def largest_num(numbers):
+    largest = numbers[0]
+    for num in numbers:
+        if num > largest:
+            largest = num
+    return largest
+
+number = [16, 2, 9, 67, 6, 88]
+result = largest_num(number)
+print(result)
+8. Find the factorial of a number
+Question:
+How do you find the factorial of a number?
+
+ 
+ 
+def fact(n):
+    if n == 0:
+        return 1
+    else:
+        return n * fact(n - 1)
+
+num = 5
+print(fact(num))
+9. Perform multiplication of two numbers without using the multiplication operator
+Question:
+How do you perform multiplication of two numbers without using the multiplication operator?
+
+ 
+ 
+def multiple_operation(a, b):
+    result = 0
+    is_negative = (a > 0) != (b > 0)
+    a, b = abs(a), abs(b)
+
+    for _ in range(b):
+        result += a
+
+    if is_negative:
+        result = -result
+
+    return result
+
+a = 15
+b = -3
+print(multiple_operation(a, b))
+10. Reverse a list
+Question:
+How do you reverse a list?
+
+ 
+ 
+def reverse(list1):
+    if not list1 or len(list1) == 0:
+        return "No element in the list"
+
+    for i in range(0, len(list1) // 2):
+        list1[i], list1[len(list1) - 1 - i] = list1[len(list1) - 1 - i], list1[i]
+
+    return list1
+
+lista = ['a', 'b', 1, 2, 3]
+print(reverse(lista))
+11. Count the duplicates in a list and create a new list without duplicates
+Question:
+How do you count the duplicates in a list and create a new list without duplicates?
+
+ 
+ 
+def count_and_remove_duplicates(list1):
+    element_count = {}
+    duplicates = []
+
+    for element in list1:
+        if element in element_count:
+            element_count[element] += 1
+        else:
+            element_count[element] = 1
+
+    for element, count in element_count.items():
+        if count > 1:
+            duplicates.append((element, count))
+            print(f"Element '{element}' occurs {count} times")
+
+    new_list = list(element_count.keys())
+    print(f"New List after removing the duplicates: {new_list}")
+    return ""
+
+lista = [1, 2, 3, 4, 5, 1, 5, 5, 10, 101, 101, 101]
+result = count_and_remove_duplicates(lista)
+print(result)
+12. Find the index of an element in a list
+Question:
+How do you find the index of an element in a list?
+
+ 
+ 
+def find_element_index(lst, k):
+    for i, element in enumerate(lst):
+        if element == k:
+            return i
+    return None
+
+list1 = [1, 2, 3, 4, 55, 6, 77]
+ele1 = 55
+result = find_element_index(list1, ele1)
+print(f"K element '{ele1}' is present at index: {result}")
+13. Find two numbers in a list that add up to a target value
+Question:
+How do you find two numbers in a list that add up to a target value?
+
+Using Nested Loops:
+
+def two_sum(lst, k):
+    for i in range(len(lst)):
+        for j in range(i + 1, len(lst)):
+            if lst[i] + lst[j] == k:
+                return [i, j]
+    return None
+
+lst1 = [6, 1, 2, 3, 4, 5]
+target = 7
+result = two_sum(lst1, target)
+print(result)
