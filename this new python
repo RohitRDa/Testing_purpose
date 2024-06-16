@@ -393,3 +393,60 @@ input_string = "Umamu aaoAIUEII!"
 vowel_counts = count_vowels(input_string)
 print("Vowel counts in the input string:")
 print(vowel_counts)
+
+
+
+
+15) the problem of finding the length of the longest substring without repeating characters
+
+
+def lengthOfLongestSubstring(str1):
+    if not s:
+        return 0
+
+    max_length = 0
+    current_substring = ''
+
+    for char in s:
+        if char not in current_substring:
+            current_substring += char
+            max_length = max(max_length, len(current_substring))
+        else:
+            start = current_substring.index(char)
+            current_substring = current_substring[start + 1:] + char
+    return max_length
+
+s = "abcabcbb"
+result = lengthOfLongestSubstring((s))
+print(result)  # Output: 3
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+16) reverse the string value wituout and with inbuilt function 
+
+def reverse_word(word):
+    reversed_word = ""
+    for char in word:
+        reversed_word = char + reversed_word
+    return reversed_word
+
+def reverse_sentence(sentence):
+    reversed_sentence = ""
+    word = ""
+    for char in sentence:
+        if char == " ":
+            reversed_sentence += reverse_word(word) + " "
+            word = ""
+        else:
+            word += char
+    reversed_sentence += reverse_word(word)
+    return reversed_sentence
+
+sentence = "My name is Argus"
+reversed_sentence = reverse_sentence(sentence)
+print(reversed_sentence)
+
+sentence = "My name is Argus rohit"
+reversed_sentence = ' '.join(word[::-1] for word in sentence.split())
+print(reversed_sentence)
