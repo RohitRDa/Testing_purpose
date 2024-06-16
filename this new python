@@ -450,3 +450,32 @@ print(reversed_sentence)
 sentence = "My name is Argus rohit"
 reversed_sentence = ' '.join(word[::-1] for word in sentence.split())
 print(reversed_sentence)
+
+
+Q 17) To determine if a string containing just the characters '(', ')', '{', '}', '[' and ']' is valid, you need to check if all the brackets are closed in the correct order.
+
+def isValid(s):
+    stack = []
+    # Dictionary to map closing brackets to their corresponding opening brackets
+    bracket_map = {')': '(', '}': '{', ']': '['}
+
+    for char in s:
+        if char in bracket_map.values():  # If it's an opening bracket
+            stack.append(char)
+        elif char in bracket_map.keys():  # If it's a closing bracket
+            # Check if the stack is not empty and the top element matches
+            if stack and stack[-1] == bracket_map[char]:
+                stack.pop()
+            else:
+                return False
+        else:
+            return False  # If the character is not a valid bracket
+
+    return not stack
+
+# Example usage:
+##print(isValid("()"))        # Output: True
+##print(isValid("()[]{}"))    # Output: True
+##print(isValid("(]"))        # Output: False
+##print(isValid("([)]"))      # Output: False
+print(isValid("(){}"))      # Output: True
