@@ -1,0 +1,95 @@
+Tuple vs List
+Mutability:
+
+Tuple: Immutable (cannot be changed after creation)
+List: Mutable (can be changed after creation)
+Syntax:
+
+Tuple: Defined using parentheses ( )
+List: Defined using square brackets [ ]
+Use Cases:
+
+Tuple: Used for fixed collections of items, can be used as keys in dictionaries
+List: Used for collections of items that may need to change or be modified
+Performance:
+
+Tuple: Generally faster due to immutability
+List: Slightly slower due to mutability
+Example:
+
+Tuple: my_tuple = (1, 2, 3)
+List: my_list = [1, 2, 3]
+List vs Dictionary
+Structure:
+
+List: Ordered collection of items, accessed by index
+Dictionary: Unordered collection of key-value pairs, accessed by keys
+Syntax:
+
+List: Defined using square brackets [ ]
+Dictionary: Defined using curly braces { } with key-value pairs
+Mutability:
+
+Both lists and dictionaries are mutable      
+Access:
+
+List: Access elements by index my_list[0]
+Dictionary: Access elements by key my_dict['key']
+Example:
+
+List: my_list = [1, 2, 3]
+Dictionary: my_dict = {'a': 1, 'b': 2, 'c': 3}
+Dictionary vs Tuple
+Structure:
+
+Dictionary: Unordered collection of key-value pairs
+Tuple: Ordered collection of items
+Access:
+
+Dictionary: Access elements by key my_dict['key']
+Tuple: Access elements by index my_tuple[0]
+Mutability:
+
+Dictionary: Mutable (can add, remove, change key-value pairs)
+Tuple: Immutable (cannot be changed after creation)
+Syntax:
+
+Dictionary: Defined using curly braces { }
+Tuple: Defined using parentheses ( )
+Example:
+
+Dictionary: my_dict = {'a': 1, 'b': 2, 'c': 3}
+Tuple: my_tuple = (1, 2, 3)
+Array vs List
+(Note: Python does not have a built-in array type, but it has a list and a module array to work with arrays. Here, array refers to the array from the array module.)
+
+Type:
+
+Array: Requires all elements to be of the same type (e.g., integers, floats)
+List: Can contain elements of different types
+Syntax:
+
+Array: Defined using the array module, e.g., import array; my_array = array.array('i', [1, 2, 3])
+List: Defined using square brackets [ ]
+Functionality:
+
+Array: More space-efficient for large arrays of basic values, supports only numeric types
+List: More flexible, supports any type of object
+Example:
+
+Array:
+python
+Copy code
+import array
+my_array = array.array('i', [1, 2, 3])
+List: my_list = [1, 2, 3]
+Summary Table
+Feature	Tuple	List	Dictionary	Array
+Syntax	(1, 2, 3)	[1, 2, 3]	{'a': 1, 'b': 2}	array.array('i', [1, 2, 3])
+Mutability	Immutable	Mutable	Mutable	Mutable
+Ordered	Yes	Yes	No	Yes
+Access	By index	By index	By key	By index
+Homogeneous types	No	No	No	Yes
+Performance	Faster (fixed size)	Slower (flexible)	Flexible (key access)	Efficient for numeric types
+Use Case	Fixed collections	Dynamic collections	Key-value pairs	Large numeric collections
+These differences should help clarify when to use each data structure based on your needs
