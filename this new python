@@ -479,3 +479,52 @@ def isValid(s):
 ##print(isValid("(]"))        # Output: False
 ##print(isValid("([)]"))      # Output: False
 print(isValid("(){}"))      # Output: True
+
+
+
+
+
+#Q18) write code to check anagram ya not ?
+def anagram(str1,str2):
+    return sorted(str1) == sorted(str2)
+
+str1='silents'
+str2='listen'
+print(anagram(str1,str2))
+
+
+from collections import Counter
+
+def anagram(str1,str2):
+    return Counter(str1) == Counter(str2)
+
+str1='mam'
+str2='amm'
+print(anagram(str1,str2))
+
+
+#Q 19) write code to check palidrome ya not ?
+
+def pali(s1):
+    return s1 == s1[::-1]
+
+s1='racecar'
+print(pali(s1))
+
+
+
+def pali(s):
+    left,right=0 ,len(s)-1
+
+    while  left < right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -=1
+
+    return True
+
+s1='racecar'
+print(pali(s1))
+
+
