@@ -528,3 +528,29 @@ s1='racecar'
 print(pali(s1))
 
 
+
+Q 20)  find the minimum and maximum values in a given list without using any built-in functions:
+
+
+
+def MIN_MAX(list1):
+    if not list1:
+        raise ValueError("This list is empty")
+
+    min_value = list1[0]
+    max_value = list1[0]
+
+    for num in list1[1:]:
+        if num < min_value:
+            min_value = num
+        if num > max_value:
+            max_value=num
+    return min_value,max_value
+
+list1=[1,2,3,4,5,61,24,5,2,1]
+
+min_val, max_val = MIN_MAX(list1)
+print("Minimum value:", min_val)
+print("Maximum value:", max_val)
+##print(MIN_MAX(list1))
+
