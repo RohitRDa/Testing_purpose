@@ -554,3 +554,21 @@ print("Minimum value:", min_val)
 print("Maximum value:", max_val)
 ##print(MIN_MAX(list1))
 
+
+
+/////////////////
+
+
+Q 21) Generate a Specific Sequence of Numbers (Coding Challenge)
+
+def generate_sequence():
+    sequence = []
+    num = 1
+    while num < 30:
+        sequence.append(num)
+        num += 3
+    return sequence
+
+print(generate_sequence())
+
+
