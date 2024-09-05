@@ -1,0 +1,52 @@
+To solve this problem, we need to maintain a count of how many times each name has been registered. 
+If a name is registered for the first time, the system should respond with "OK". If the name has already been registered, the system should append a number to the name to make it unique.
+
+Here's the Python code implementing this approach:
+
+def registration_system(n, names):
+    # Dictionary to keep track of the count of each name
+    name_count = {}
+    
+    # List to store the results for each registration request
+    results = []
+    
+    # Iterate through each name
+    for name in names:
+        # If the name has never been encountered
+        if name not in name_count:
+            results.append("OK")
+            # Initialize the count of this name
+            name_count[name] = 1
+        else:
+            # Generate a new unique name by appending the count
+            new_name = f"{name}{name_count[name]}"
+            results.append(new_name)
+            # Increment the count of the original name
+            name_count[name] += 1
+            # Initialize the count of the new unique name
+            name_count[new_name] = 1
+            
+    # Print all results
+    for result in results:
+        print(result)
+
+# Input reading
+n = int(input())
+names = [input().strip() for _ in range(n)]
+
+# Call the function with the input values
+registration_system(n, names)
+
+
+
+
+
+Explanation of the Code:
+Dictionary name_count: Keeps track of how many times each name has been registered.
+Loop through each name:
+If the name is new, append "OK" to the results and add the name to the dictionary with a count of 1.
+If the name exists, create a unique name by appending the current count, update the dictionary for both the original and new names.
+Output the results: After processing all names, print the appropriate responses.
+
+
+
