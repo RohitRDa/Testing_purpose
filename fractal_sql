@@ -1,0 +1,125 @@
+1. Explain the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN in SQL. When would you use each?
+    INNER JOIN: Returns only the rows that have matching values in both tables. If there is no match, the row is excluded.
+    Use Case: When you need only the records that exist in both tables.
+    LEFT JOIN (LEFT OUTER JOIN): Returns all rows from the left table and the matched rows from the right table. If there’s no match, NULL values are returned for the right table.
+    Use Case: When you want all rows from the left table, even if they don't have matching records in the right table.
+    RIGHT JOIN (RIGHT OUTER JOIN): Returns all rows from the right table and the matched rows from the left table. If there’s no match, NULL values are returned for the left table.
+    Use Case: When you want all rows from the right table, even if they don't have matching records in the left table.
+    FULL OUTER JOIN: Returns rows when there is a match in either the left or right table. If there is no match, NULLs are returned for non-matching rows.
+    Use Case: When you need all records from both tables, regardless of whether they have matches.
+
+
+2. What are window functions in SQL? Provide examples of their usage and discuss scenarios where they are particularly useful.
+    Window Functions: These functions perform calculations across a set of rows related to the current row, without collapsing them into a single output row.
+    
+    Examples:
+    
+    sql
+    Copy code
+    SELECT name, salary, 
+           RANK() OVER (ORDER BY salary DESC) AS salary_rank
+    FROM employees;
+    This example ranks employees by salary.
+    
+    Common Window Functions: ROW_NUMBER(), RANK(), DENSE_RANK(), LEAD(), LAG().
+    Use Case: They are particularly useful when you need to perform aggregate operations (like SUM, AVG, COUNT) over partitions of data while retaining the detail of each row.
+
+
+3. How does SQL handle NULL values in different operations? Discuss the implications of NULLs in JOINS and aggregations.
+  NULL in SQL: Represents a missing or unknown value.
+  
+  In JOINS: NULLs are treated as unmatched values in INNER and OUTER JOINs. In OUTER JOINs, rows with NULLs in the join condition are included from one table, while the other table's values are NULL.
+  
+  In Aggregations: Functions like COUNT(), SUM(), AVG() ignore NULLs, but functions like COUNT(*) count all rows, including those with NULLs.
+  
+  Implication: You need to handle NULLs carefully, using COALESCE() or IS NULL to avoid unexpected results.
+
+
+
+4. Describe the process of indexing in SQL databases. How do indexes improve query performance, and what are the trade-offs?
+  Indexing: Indexes in SQL databases allow faster retrieval of records by creating a data structure that stores pointers to the data rows. They improve query performance by reducing the number of data rows the query engine scans.
+  
+  Types of Indexes: B-tree (most common), bitmap, and hash indexes.
+  
+  Trade-offs:
+  
+  Advantages: Faster query execution, especially on large datasets and frequent search queries.
+  Drawbacks: Slower write operations (INSERT, UPDATE, DELETE) since indexes need to be updated, increased storage requirements.
+
+
+5. What are common techniques to optimize SQL queries? Discuss how you would improve the performance of a slow-running query.
+    Techniques:
+    Indexes: Add appropriate indexes to columns used in WHERE, JOIN, and ORDER BY clauses.
+    
+    Query Optimization: Avoid SELECT *, use WHERE clauses to limit rows, and use joins efficiently.
+    
+    Partitioning: Divide large tables into smaller, more manageable pieces (range, list, hash partitioning).
+    
+    Avoiding unnecessary functions: Especially in WHERE clauses, since they can prevent index usage.
+    
+    Improving Slow Queries:
+    Analyze the query using EXPLAIN to understand execution plans.
+    Use indexing, avoid correlated subqueries, and break complex queries into smaller steps.
+
+
+6. Explain the concept of normalization in SQL databases. What are the different normal forms, and how do they impact database design?
+    Normalization: The process of organizing data in a database to minimize redundancy and improve data integrity.
+    
+    Normal Forms:
+    
+    1NF: Ensures each column contains atomic values and each record is unique.
+    2NF: Satisfies 1NF and ensures that all non-key attributes are fully dependent on the primary key.
+    3NF: Satisfies 2NF and ensures that no transitive dependencies exist.
+    BCNF (Boyce-Codd): A stricter version of 3NF, where every determinant is a candidate key.
+    Impact: Helps in reducing data anomalies and ensures efficient database design. However, excessive normalization can lead to performance overhead due to more joins.
+
+
+
+7. What is a Common Table Expression (CTE) in SQL, and how does it differ from subqueries? Provide examples of when to use CTEs.
+    CTE: A temporary result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement.
+    
+    Example:
+    
+    sql
+    Copy code
+    WITH employee_salary AS (
+        SELECT employee_id, salary FROM employees WHERE department = 'IT'
+    )
+    SELECT * FROM employee_salary;
+    Difference from Subqueries: CTEs improve readability and can be referenced multiple times in a query, while subqueries are embedded in other queries and are often harder to debug or optimize.
+    
+    Use Case: When you have complex queries or need to reuse a query result multiple times.
+    
+    8. Discuss the differences between SQL and NoSQL databases. When would you choose SQL over NoSQL and vice versa?
+    SQL: Relational databases that use structured schema, ACID compliance, and SQL for querying (e.g., MySQL, PostgreSQL).
+    
+    Use SQL: When data consistency, integrity, and complex queries (joins, aggregations) are critical.
+    NoSQL: Non-relational databases that offer flexible schema designs (e.g., MongoDB, Cassandra).
+    
+    Use NoSQL: When you need to scale horizontally, deal with large volumes of unstructured or semi-structured data, or require flexible schema designs.
+
+
+9. Explain the ACID properties in SQL databases. Why are they important for transactional consistency?
+    ACID:
+    Atomicity: Ensures that all parts of a transaction are completed successfully, or none are.
+    
+    Consistency: Ensures that transactions move the database from one valid state to another.
+    
+    Isolation: Ensures that concurrent transactions do not interfere with each other.
+    
+    Durability: Ensures that once a transaction is committed, it will persist, even in the event of a crash.
+    
+    Importance: These properties are essential for maintaining data integrity and preventing corruption during transactions.
+
+
+10. What are stored procedures in SQL, and how can they be used to encapsulate business logic? Discuss the advantages and potential drawbacks of using stored procedures.
+    Stored Procedures: Precompiled SQL code that can be reused and executed with different parameters.
+    
+    Advantages:
+    Improved performance (since they are precompiled).
+    Reusable and modular code.
+    Encapsulation of business logic in the database layer.
+    Enhanced security by controlling access to underlying data.
+    Drawbacks:
+    Can be harder to maintain when the logic changes frequently.
+    May lead to tight coupling between application and database layers.
