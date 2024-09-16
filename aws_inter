@@ -1,0 +1,80 @@
+Terraform
+Terraform is an open-source Infrastructure as Code (IaC) tool that allows you to define and provision infrastructure using a declarative configuration language. It supports multiple cloud providers, including AWS.
+
+Key Concepts:
+
+Configuration Files: Define the infrastructure using .tf files.
+Providers: Define the cloud provider (e.g., AWS).
+Resources: Specify the resources to be managed (e.g., EC2 instances, S3 buckets).
+Modules: Reusable configurations to standardize infrastructure.
+State: Tracks the state of the infrastructure to manage changes.
+Common Commands:
+
+terraform init: Initialize a working directory.
+terraform plan: Preview the changes Terraform will make.
+terraform apply: Apply the changes to reach the desired state.
+terraform destroy: Remove all resources defined in the configuration.
+AWS SageMaker
+AWS SageMaker is a fully managed service for building, training, and deploying machine learning models.
+
+Key Components:
+
+SageMaker Studio: An integrated development environment (IDE) for machine learning.
+Notebook Instances: Managed Jupyter notebooks for development.
+Training Jobs: Jobs to train models using various algorithms or custom code.
+Endpoints: Real-time inference endpoints for deploying models.
+Pipelines: Automated workflows for ML model building and deployment.
+Model Registry: Central repository for managing model versions.
+Common Uses:
+
+Data Preparation: Using built-in tools for data cleaning and transformation.
+Training: Training models with built-in algorithms or custom scripts.
+Deployment: Deploying models for batch or real-time predictions.
+Monitoring: Tracking model performance and drift.
+AWS Services for Developers
+Here’s a list of AWS services commonly used by developers:
+
+Compute
+
+EC2: Scalable virtual servers.
+Lambda: Serverless compute for running code in response to events.
+ECS: Container orchestration service for Docker containers.
+EKS: Managed Kubernetes service.
+Storage
+
+S3: Object storage for storing and retrieving any amount of data.
+EBS: Block storage for EC2 instances.
+EFS: Scalable file storage for use with EC2 instances.
+Database
+
+RDS: Managed relational database service (e.g., MySQL, PostgreSQL, SQL Server).
+DynamoDB: Managed NoSQL database.
+Aurora: High-performance relational database compatible with MySQL and PostgreSQL.
+Networking
+
+VPC: Virtual private cloud to define a network topology.
+Route 53: Scalable DNS and domain name registration.
+API Gateway: Managed API gateway for creating, publishing, and managing APIs.
+Developer Tools
+
+CodeBuild: Fully managed build service.
+CodeDeploy: Deployment service for automated code deployments.
+CodePipeline: Continuous integration and delivery service.
+CloudWatch: Monitoring and logging service.
+Security & Identity
+
+IAM: Identity and Access Management for defining permissions and roles.
+Cognito: User authentication and management.
+Secrets Manager: Securely manage secrets and credentials.
+Management & Governance
+
+CloudFormation: IaC tool similar to Terraform, for defining AWS resources.
+Config: Provides a detailed view of the configuration of AWS resources.
+CloudTrail: Tracks API calls and user activity.
+Preparation Tips for the Interview:
+
+Understand Core Concepts: Make sure you can explain key concepts of Terraform and SageMaker.
+Know Common Use Cases: Be familiar with how these services are used in real-world scenarios.
+Hands-On Practice: If possible, get hands-on experience with Terraform and SageMaker through labs or projects.
+AWS Knowledge: Be ready to discuss other AWS services, especially those relevant to your role as a developer.
+This should give you a solid foundation for discussing Terraform, AWS SageMaker, and other relevant AWS services in your interview.
