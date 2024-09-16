@@ -1,0 +1,181 @@
+1. What is an API and how does it work?
+  API (Application Programming Interface) allows communication between two software applications. It defines a set of rules for how the applications can interact.
+  Example: A weather app might use an API to get weather data from a server.
+  APIs can be RESTful or SOAP. RESTful APIs are most common, relying on HTTP methods like GET, POST, PUT, DELETE for interaction.
+
+2. Do you know REST API?
+  REST (Representational State Transfer) is a set of architectural principles for designing networked applications. REST APIs use HTTP requests for communication.
+  It is stateless, meaning each call from the client contains all necessary data for the server to understand and process the request.
+
+
+3. Do you know FastAPI? Explain FastAPI.
+  FastAPI is a modern web framework for building APIs with Python 3.7+ based on standard Python-type hints.
+  It is designed for high performance and fast development. It supports asynchronous request handling, making it more efficient in handling a large number of requests.
+  Example: It’s useful for building APIs that are machine learning-based.
+
+
+4. What is GET, POST, and GET Request?
+  GET is used to request data from a server.
+  POST is used to send data to the server, like submitting a form or uploading a file.
+  GET requests are safe and idempotent, while POST requests may change the state of the server.
+
+
+5. Why do we need Activation functions in Neural Networks (NN)?
+  Activation functions introduce non-linearity into the network, allowing it to learn complex patterns in the data.
+  Without them, the neural network would behave like a linear model, which limits its learning capacity.
+
+
+6. How does a Neural Network work?
+  A Neural Network consists of layers of interconnected neurons, where each neuron processes inputs, applies weights, and passes the result through an activation function.
+  The network learns by adjusting weights based on the error in predictions (via backpropagation) and minimizing this error through an optimization process like gradient descent.
+
+
+7. How do you do Summarization without any models?
+  Rule-based methods for text summarization include extracting important sentences based on keyword frequency, sentence position, or using statistical approaches like Term Frequency-Inverse Document Frequency (TF-IDF).
+
+
+8. Explain Docker.
+  Docker is a platform that packages applications and their dependencies into containers, ensuring that they run consistently in different environments.
+  Containers isolate the application, making it lightweight and efficient compared to virtual machines
+
+
+9. How do you use Docker and Kubernetes?
+  Docker is used to containerize applications.
+  Kubernetes orchestrates containers by managing their deployment, scaling, and networking across clusters of machines.
+
+
+10. How do you containerize with Docker?
+    Create a Dockerfile that defines the application and its dependencies.
+    Build a Docker image using the docker build command.
+    Run a container from the image using docker run.
+
+
+11. What is Horizontal and Vertical scaling in Kubernetes?
+    Horizontal scaling adds more instances of services (e.g., more containers).
+    Vertical scaling increases the resources (CPU, RAM) of existing services.
+
+
+12. Find missing value in the range of 1 to 10.
+
+    # Define the list with a missing number
+    given_list = [1, 2, 3, 4, 5, 6, 7, 8, 10]
+    
+    # Calculate the expected sum of numbers from 1 to 10
+    expected_sum = sum(range(1, 11))
+    
+    # Calculate the actual sum of the numbers in the given list
+    actual_sum = sum(given_list)
+    
+    # The missing number is the difference between the expected sum and the actual sum
+    missing_value = expected_sum - actual_sum
+    
+    # Print the missing number
+    print(f"The missing value is: {missing_value}")
+
+12. Finding the missing value in the range of 1 to 10
+      # Define the list with a missing number
+      given_list = [1, 2, 3, 4, 5, 6, 7, 8, 10]
+      
+      # Calculate the expected sum of numbers from 1 to 10
+      expected_sum = sum(range(1, 11))
+      
+      # Calculate the actual sum of the numbers in the given list
+      actual_sum = sum(given_list)
+      
+      # The missing number is the difference between the expected sum and the actual sum
+      missing_value = expected_sum - actual_sum
+      
+      # Print the missing number
+      print(f"The missing value is: {missing_value}")
+
+13. List comprehension to get a list of even numbers from original_list
+    original_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    
+    # List comprehension to get even numbers
+    even_numbers = [x for x in original_list if x % 2 == 0]
+    
+    # Print the list of even numbers
+    print(f"Even numbers: {even_numbers}")
+
+14. List comprehension to replace even numbers with "even" and odd numbers with "odd"
+    result = ["even" if x % 2 == 0 else "odd" for x in original_list]
+    
+    # Print the result
+    print(f"Even/Odd replacement: {result}")
+
+
+15. How does an activation function introduce non-linearity in NN?
+    Activation functions like ReLU or Sigmoid map input values to non-linear outputs, allowing the network to learn complex data patterns that aren't possible with linear transformations.
+
+
+16. How do Activation functions squeeze inputs?
+    Activation functions, like Sigmoid and tanh, compress input values into a smaller range (e.g., sigmoid compresses between 0 and 1), making them manageable for neural networks.
+
+
+17. Time complexity of searching in List, Set, and Dictionary:
+    List: O(n) because it requires a linear search.
+    Set/Dictionary: O(1) because they use hashing.
+
+
+18. What is the time complexity of the program you have written?
+    You should analyze your code for loops and recursive calls. For example, a loop over n items will have O(n) time complexity.
+
+19. What is Sync and Async in Python?
+    Synchronous operations block the program until the task is completed.
+    Asynchronous allows the program to continue running other tasks while waiting for another task to complete, often managed with the async and await keywords.
+
+
+20. What are the different databases you have worked with?
+    Example: MySQL, PostgreSQL, MongoDB, and GCP BigQuery.
+
+
+21. Difference between SQL and MongoDB?
+    SQL databases (relational) store data in structured tables with predefined schemas.
+    MongoDB (NoSQL) stores data in flexible JSON-like documents, suitable for unstructured or semi-structured data.
+
+
+22. Why does Set and Dict take less time to search while List takes O(n)?
+    Set and Dictionary use hash tables, which allow for constant-time lookups, while List requires a linear search through its elements.
+
+
+23. Why do we use Kubernetes?
+    Kubernetes automates the deployment, scaling, and management of containerized applications across clusters of machines.
+
+
+24. Why do we need Kubeflow, and what is its use?
+    Kubeflow is a platform for deploying, managing, and scaling machine learning workflows on Kubernetes. It makes it easier to run machine learning tasks in distributed environments.
+
+
+25. How do Docker, Kubernetes, and Kubeflow come into play when building a product?
+    Docker packages the application.
+    Kubernetes handles the deployment and scaling.
+    Kubeflow is used to manage the ML pipeline, allowing for experimentation, model training, and serving.
+
+
+26. What are Generators in Python?
+    Generators are functions that yield values one at a time, allowing for lazy evaluation. This is efficient for handling large datasets or streams of data.
+
+
+27. What is CI/CD pipeline?
+    CI/CD (Continuous Integration/Continuous Deployment) is a set of practices that automatically build, test, and deploy code changes, ensuring quick delivery and reliable software.
+
+
+28. What is Git?
+    Git is a version control system that tracks changes in the codebase, allowing multiple developers to collaborate
+
+
+29. What is Git rebase?
+    Git rebase integrates changes from one branch into another by applying commits on top of the current branch, keeping the history linear and clean.
+
+
+30. What is Regularization, and why do we use it?
+    Regularization adds a penalty to the loss function to reduce overfitting. It helps the model generalize better to unseen data.
+    Common methods include L1 (Lasso) and L2 (Ridge) regularization.
+
+
+31. Bubble problem:
+    The bubble reduces to half its size every 2 seconds.
+    To reduce to 1/8th its size (2^3), it takes 6 seconds (3 intervals of 2 seconds each).
+
+32. Egg problem (breaking floors):
+    This problem is a variation of the egg drop puzzle. You could use a binary search approach to minimize the number of attempts to find the critical floor.
