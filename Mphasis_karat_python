@@ -1,1 +1,176 @@
+Q 1) Question: Find the page and book read counts
 
+import requests
+
+# Fetch the file from the URL
+url = "https://public.karat.io/content/test/test_file.txt"
+response = requests.get(url)
+data = response.text
+
+# Initialize counters for book count and page count
+book_set = set()
+total_pages = 0
+
+# Read file line by line
+for line in data.splitlines():
+    # Split the line by comma
+    fields = line.split(',')
+
+    # Extract relevant information
+    book_name = fields[2].strip()
+    pages = int(fields[3].strip())
+
+    # Accumulate page count
+    total_pages += pages
+
+    # Add book to set to count unique books
+    book_set.add(book_name)
+
+# Output the total number of books and pages
+book_count = len(book_set)
+print(f"Book count: {book_count}")
+print(f"Page count: {total_pages}")
+##
+##print(f"{book_count} books and {total_pages} pages for above")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import requests
+
+# Fetch the file
+url = "https://public.karat.io/content/test/test_file.txt"
+data = requests.get(url).text
+
+# Initialize counters
+books = set()
+pages = 0
+
+# Process each line in the file
+for line in data.splitlines():
+    _, _, book_name, page_count = line.split(',')
+    books.add(book_name.strip())
+    pages += int(page_count.strip())
+
+# Print the results
+print(f"Book count: {len(books)}")
+print(f"Page count: {pages}")
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Q 2) Find the URL that is most commonly used(The url that is used highest times)?
+
+import requests
+
+# Fetch the file from the URL
+url_2 = "https://public.karat.io/content/urls2.txt"
+response_2 = requests.get(url_2)
+url_data = response_2.text
+
+# Dictionary to store URL counts
+url_count = {}
+
+# Process each URL and count occurrences
+for line in url_data.splitlines():
+    url = line.strip()
+    if url in url_count:
+        url_count[url] += 1
+    else:
+        url_count[url] = 1
+
+# Find the most common URL
+most_common_url = max(url_count, key=url_count.get)
+print(f'Most common URL: {most_common_url} (used {url_count[most_common_url]} times)')
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Q 3) Write a program that downloads text file and reads the given file, then outputs how many times IP addresses were blocked in this file
+
+##import requests
+##
+### Fetch the log file from the URL
+##log_url = "https://public.karat.io/content/test/test_log.txt"
+##log_response = requests.get(log_url)
+##log_data = log_response.text
+##
+### Counter for the number of blocks
+##block_count = 0
+##release_count = 0
+##
+### Read the file line by line and look for "Block"
+##for line in log_data.splitlines():
+##    if "Block" in line:
+##        block_count += 1
+##    else:
+##        release_count += 1
+##
+### Output the number of times IP addresses were blocked
+##print(f'Number of times IP addresses were blocked: {block_count}')
+##print(f'Number of times IP addresses were Release: {release_count}')
+##
+
+
+import requests
+
+# Fetch the log file from the URL
+log_url = "https://public.karat.io/content/test/test_log.txt"
+log_response = requests.get(log_url)
+
+# Check for successful response
+if log_response.status_code == 200:
+    log_data = log_response.text
+
+    # Counter for the number of blocks and releases
+    block_count = 0
+    release_count = 0
+
+    # Read the file line by line and look for "Block" or "Release"
+    for line in log_data.splitlines():
+        if "Block" in line:
+            block_count += 1
+        elif "Release" in line:
+            release_count += 1
+
+    # Output the number of times IP addresses were blocked or released
+    print(f'Number of times IP addresses were blocked: {block_count}')
+    print(f'Number of times IP addresses were released: {release_count}')
+
+else:
+    print(f"Error: Failed to download log file. Status code:  {log_response.status_code}")
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+Q 4)  Python code that solves the problem of extracting the main URL and domain name from each URL in the file. The code follows these steps:
+
+Download the text file from a given URL.
+Parse each URL to extract the main URL and domain name.
+Print the main URL and the domain name in the specified format.
+
+
+import requests
+from urllib.parse import urlparse
+
+# Function to extract the main URL and domain name
+def extract_main_url_and_domain(url):
+    parsed_url = urlparse(url)
+    domain_parts = parsed_url.netloc.split('.')
+
+    # If domain has subdomain, extract main URL and domain
+    if len(domain_parts) > 2:
+        main_url = '.'.join(domain_parts[-3:])
+        domain_name = '.'.join(domain_parts[-2:])
+    else:
+        main_url = parsed_url.netloc
+        domain_name = parsed_url.netloc
+
+    return main_url, domain_name
+
+# Download the file containing the list of URLs
+url_file = "https://public.karat.io/content/urls2.txt"  # replace with actual URL if different
+response = requests.get(url_file)
+url_data = response.text
+
+# Process each line (each URL) and extract the main URL and domain name
+print("Main URL\t\tDomain Name")
+for line in url_data.splitlines():
+    url = line.strip()
+    if url:  # Ensure the line isn't empty
+        main_url, domain_name = extract_main_url_and_domain(url)
+        print(f'{main_url}\t{domain_name}')
