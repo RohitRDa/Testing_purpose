@@ -318,3 +318,230 @@ SUM(Revenue): Again calculates the total revenue for each region.
 RANK() OVER (ORDER BY SUM(Revenue) DESC): Assigns a rank to each region based on the total revenue in descending order. Regions with the same total revenue will receive the same rank.
 GROUP BY Region: Groups the results by region.
 ORDER BY RevenueRank: Orders the final output based on the ranking.
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+We’ll assume some basic structure and data for the tables mentioned in your questions.
+
+Set 1: MenuTable and Orders
+Table Structure:
+MenuTable
+
+ItemID (INT)
+ItemName (VARCHAR)
+Price (DECIMAL)
+Category (VARCHAR)
+Orders
+
+OrderID (INT)
+CustomerID (INT)
+ItemID (INT)
+Quantity (INT)
+SQL Queries:
+-----------Print only given 2 columns from MenuTable (ItemName, Price):
+
+sql
+Copy code
+SELECT ItemName, Price
+FROM MenuTable;
+--------------Print all data from MenuTable where price > $10:
+
+sql
+Copy code
+SELECT *
+FROM MenuTable
+WHERE Price > 10;
+------------Print all data from MenuTable where category is not 'Pasta':
+
+sql
+Copy code
+SELECT *
+FROM MenuTable
+WHERE Category <> 'Pasta';
+--------------Print all data from MenuTable where items are ordered by customer (JOIN):
+
+sql
+Copy code
+SELECT m.*
+FROM MenuTable m
+INNER JOIN Orders o ON m.ItemID = o.ItemID;
+
+
+Set 2: Books and Borrowers
+Table Structure:
+Books
+
+BookID (INT)
+BookName (VARCHAR)
+PublicationYear (INT)
+AuthorName (VARCHAR)
+Borrowers
+
+BorrowerID (INT)
+BookID (INT)
+BorrowDate (DATE)
+SQL Queries:
+----------------Print two columns from Table Book (BookName, AuthorName):
+
+sql
+Copy code
+SELECT BookName, AuthorName
+FROM Books;
+----------------Print all data from Table Book where Book name is 'something':
+
+sql
+Copy code
+SELECT *
+FROM Books
+WHERE BookName = 'something';
+----------------Print all data from Table Book where publication year is less than 1960:
+
+sql
+Copy code
+SELECT *
+FROM Books
+WHERE PublicationYear < 1960;
+----------------Print all data from table book where author name is 'John Kennedy':
+
+sql
+Copy code
+SELECT *
+FROM Books
+WHERE AuthorName = 'John Kennedy';
+Set 3: Product and Category
+Table Structure:
+Product
+
+ProductID (INT)
+ProductName (VARCHAR)
+Price (DECIMAL)
+CategoryID (INT)
+Category
+
+CategoryID (INT)
+CategoryName (VARCHAR)
+SQL Queries:
+--------------------Print only given 2 columns from Product table (ProductName, Price):
+
+sql
+Copy code
+SELECT ProductName, Price
+FROM Product;
+---------------------Print all data from Product table where price > $10:
+
+sql
+Copy code
+SELECT *
+FROM Product
+WHERE Price > 10;
+------------------------------Print all data from Category where CategoryName is not 'Electronics':
+
+sql
+Copy code
+SELECT *
+FROM Category
+WHERE CategoryName <> 'Electronics';
+-----------------------Print all data from Products table where items are ordered by customer (INNER JOIN with GROUP BY):
+
+sql
+Copy code
+SELECT p.*, COUNT(o.OrderID) AS OrderCount
+FROM Product p
+INNER JOIN Orders o ON p.ProductID = o.ItemID
+GROUP BY p.ProductID, p.ProductName, p.Price;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1. Aggregate Functions
+Aggregate functions perform calculations on a set of values and return a single value. Common aggregate functions include:
+
+COUNT(): Returns the number of rows that match a specified condition.
+SUM(): Returns the total sum of a numeric column.
+AVG(): Returns the average value of a numeric column.
+MIN(): Returns the smallest value in a set.
+MAX(): Returns the largest value in a set.
+Example:
+
+sql
+Copy code
+SELECT COUNT(*) AS TotalStudents,
+       AVG(Score) AS AverageScore,
+       MIN(Score) AS LowestScore,
+       MAX(Score) AS HighestScore
+FROM Students;
+2. Joins
+Joins are used to combine rows from two or more tables based on a related column. There are several types of joins:
+
+INNER JOIN: Returns only the rows that have matching values in both tables.
+LEFT JOIN (or LEFT OUTER JOIN): Returns all rows from the left table, and the matched rows from the right table. If there is no match, NULLs are returned for the right table.
+RIGHT JOIN (or RIGHT OUTER JOIN): Returns all rows from the right table, and the matched rows from the left table. If there is no match, NULLs are returned for the left table.
+FULL JOIN (or FULL OUTER JOIN): Returns all rows when there is a match in either left or right table records. If there is no match, NULLs are returned for non-matching rows.
+CROSS JOIN: Returns the Cartesian product of both tables (i.e., every combination of rows).
+Example of INNER JOIN:
+
+sql
+Copy code
+SELECT s.StudentName, t.TeacherName
+FROM Students s
+INNER JOIN Teachers t ON s.TeacherID = t.ID;
+3. Truncate the Text
+To truncate text in SQL, you can use the SUBSTRING() function to retrieve a part of a string, or LEFT() to get the leftmost characters of a string.
+
+Example:
+
+sql
+Copy code
+SELECT SUBSTRING(ItemName, 1, 10) AS ShortName
+FROM MenuTable;
+4. Delete Rows in a Table
+To delete rows from a table, you can use the DELETE statement, specifying a WHERE clause to filter the rows to be deleted.
+
+Example:
+
+sql
+Copy code
+DELETE FROM Students
+WHERE GraduationYear < 2020;
+5. Contains and LIKE Functions
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column. The CONTAINS function is often used in full-text search scenarios.
+
+Example of LIKE:
+
+sql
+Copy code
+SELECT *
+FROM Students
+WHERE Name LIKE 'J%';  -- Names that start with 'J'
+Example of CONTAINS (in SQL Server):
+
+sql
+Copy code
+SELECT *
+FROM Books
+WHERE CONTAINS(Description, 'science');
+6. Delete Duplicate Entries Based on a Column Value
+To delete duplicate entries from a table, you can use a common table expression (CTE) or a temporary table to identify duplicates.
+
+Example using CTE:
+
+sql
+Copy code
+WITH CTE AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY Email ORDER BY ID) AS rn
+    FROM Users
+)
+DELETE FROM CTE
+WHERE rn > 1;
+7. Different Types of Joins Explained
+INNER JOIN: Returns records that have matching values in both tables. This is the most common type of join.
+
+LEFT JOIN: Returns all records from the left table and matched records from the right table. Unmatched records from the right table will have NULLs.
+
+RIGHT JOIN: Similar to LEFT JOIN but returns all records from the right table and matched records from the left table.
+
+FULL JOIN: Combines the results of both LEFT JOIN and RIGHT JOIN. It returns all records from both tables and fills in NULLs where there are no matches.
+
+CROSS JOIN: Returns the Cartesian product of both tables. If table A has 3 rows and table B has 4 rows, the result will have 12 rows.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
