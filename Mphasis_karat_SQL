@@ -1,1 +1,320 @@
+Q 1) there details you provided for the Students, Teachers, and Grades tables:
 
+Table Structure
+Students:
+
+id (student's ID)
+name (student's name)
+teacher_id (ID of the teacher who teaches the student)
+Teachers:
+
+id (teacher's ID)
+name (teacher's name)
+Grades:
+
+Student_id (ID of the student)
+Assignment_id (ID of the assignment)
+Grades (grade obtained by the student)
+
+-- 1. Create the Students table
+CREATE TABLE Students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),
+    teacher_id INT
+);
+
+-- 2. Create the Teachers table
+CREATE TABLE Teachers (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- 3. Create the Grades table
+CREATE TABLE Grades (
+    Student_id INT,
+    Assignment_id INT,
+    Grades DECIMAL(5, 2),
+    PRIMARY KEY (Student_id, Assignment_id)
+);
+
+-- Insert data into Teachers table
+INSERT INTO Teachers (id, name)
+VALUES 
+    (1, 'Mr. Smith'),
+    (2, 'Ms. Johnson'),
+    (3, 'Dr. Brown');
+
+-- Insert data into Students table
+INSERT INTO Students (id, name, teacher_id)
+VALUES
+    (101, 'Alice', 1),
+    (102, 'Bob', 2),
+    (103, 'Charlie', 3),
+    (104, 'David', 1),
+    (105, 'Eve', 2);
+
+-- Insert data into Grades table
+INSERT INTO Grades (Student_id, Assignment_id, Grades)
+VALUES
+    (101, 1, 85.5),
+    (101, 2, 92.0),
+    (102, 1, 78.0),
+    (102, 2, 81.5),
+    (103, 1, 88.0),
+    (103, 2, 90.0),
+    (104, 1, 75.0),
+    (104, 2, 70.5),
+    (105, 1, 95.0),
+    (105, 2, 89.5);
+
+////////////////////////////////////////////////////////////ANSWE////////////////////////////////////////////////////////////////
+Print student_id, student_name, and teacher_name: You need to join the Students table with the Teachers table using the teacher_id field from the Students table and the id field from the Teachers table.
+
+
+SELECT 
+    s.id AS student_id, 
+    s.name AS student_name, 
+    t.name AS teacher_name
+FROM 
+    Students s
+JOIN 
+    Teachers t 
+ON 
+    s.teacher_id = t.id;
+
+
+Explanation:
+Students s and Teachers t are table aliases for ease of reference.
+This query joins the Students and Teachers tables on the teacher's ID.
+It selects the student's ID, student’s name, and teacher’s name.
+Print student_id and the average grade where grades are more than half of the average:
+
+First, we need to calculate the average grade for all students and then filter out grades that are more than half of this average.
+
+
+SELECT 
+    g.Student_id,
+    AVG(g.Grades) AS avg_grade
+FROM 
+    Grades g
+GROUP BY 
+    g.Student_id
+HAVING 
+    AVG(g.Grades) > (SELECT AVG(Grades) / 2 FROM Grades);
+
+
+Explanation:
+AVG(g.Grades) calculates the average grade for each student (grouped by Student_id).
+The HAVING clause ensures that only students whose average grade is more than half of the overall average grade are returned.
+(SELECT AVG(Grades) / 2 FROM Grades) calculates half of the overall average grade across all students.
+Summary
+The first query joins the Students and Teachers tables and prints the required details.
+The second query filters students who have an average grade greater than half the overall average and prints their student_id and average grade.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Q 2) To create the necessary tables in SQL for both scenarios (Candidates and Donations, and Employee and Sales), here is the structure for each:
+
+Scenario 1: Candidate, Donation, and Charity Tables
+sql
+Copy code
+-- Create the Candidate table
+CREATE TABLE Candidate (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- Create the Charity table
+CREATE TABLE Charity (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- Create the Donation table
+CREATE TABLE Donation (
+    id INT PRIMARY KEY,
+    candidate_id INT,
+    charity_id INT,
+    amount DECIMAL(10, 2),
+    FOREIGN KEY (candidate_id) REFERENCES Candidate(id),
+    FOREIGN KEY (charity_id) REFERENCES Charity(id)
+);
+
+-- Insert sample data into Candidate table
+INSERT INTO Candidate (id, name) VALUES
+(1, 'John Doe'),
+(2, 'Jane Smith'),
+(3, 'Alice Brown');
+
+-- Insert sample data into Charity table
+INSERT INTO Charity (id, name) VALUES
+(1, 'Red Cross'),
+(2, 'Habitat for Humanity');
+
+-- Insert sample data into Donation table
+INSERT INTO Donation (id, candidate_id, charity_id, amount) VALUES
+(1, 1, 1, 25.00),
+(2, 1, 2, 30.00),
+(3, 2, 1, 45.00),
+(4, 3, 2, 50.00),
+(5, 3, 1, 15.00);
+
+
+Scenario 2: Employee and Sales Tables
+
+sql
+Copy code
+-- Create the Employee table
+CREATE TABLE Employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- Create the Sales table
+CREATE TABLE Sales (
+    id INT PRIMARY KEY,
+    employee_id INT,
+    sale_amount DECIMAL(10, 2),
+    FOREIGN KEY (employee_id) REFERENCES Employee(id)
+);
+
+-- Insert sample data into Employee table
+INSERT INTO Employee (id, name) VALUES
+(1, 'Alice'),
+(2, 'Bob'),
+(3, 'Charlie');
+
+-- Insert sample data into Sales table
+INSERT INTO Sales (id, employee_id, sale_amount) VALUES
+(1, 1, 200.00),
+(2, 1, 150.00),
+(3, 2, 300.00),
+(4, 3, 100.00),
+(5, 1, 250.00),
+(6, 2, 100.00);
+
+
+/////////////////////////////answer/////////////////////////////////////////
+
+Query 1: Find aggregate donations that are <= 50
+sql
+Copy code
+SELECT c.name AS candidate_name, SUM(d.amount) AS total_donation
+FROM Donation d
+JOIN Candidate c ON d.candidate_id = c.id
+GROUP BY c.name
+HAVING SUM(d.amount) <= 50;
+
+
+Scenario 2: Employee and Sales Tables
+We are tasked with finding the maximum number of sales done by an employee.
+
+Assuming we have the following table structures:
+
+Employee: id, name
+Sales: id, employee_id, sale_amount
+Query 2: Find the employee with the highest number of sales
+sql
+Copy code
+SELECT e.name AS employee_name, COUNT(s.id) AS total_sales
+FROM Sales s
+JOIN Employee e ON s.employee_id = e.id
+GROUP BY e.name
+ORDER BY total_sales DESC
+LIMIT 1;
+////////////////////////////////////////////////////////////////////////////
+
+Q 3) Create Fresh SalesPerson and Sales Tables
+Now, create the tables with the correct structure:
+
+
+-- Create SalesPerson table
+CREATE TABLE SalesPerson (
+    id INTEGER PRIMARY KEY,     -- Unique identifier for each salesperson
+    name TEXT                   -- Name of the salesperson
+);
+
+-- Create Sales table with a foreign key to SalesPerson
+CREATE TABLE Sales (
+    id INTEGER PRIMARY KEY,           -- Unique identifier for each sale
+    salesperson_id INTEGER,           -- Foreign key linking to SalesPerson table
+    sale_amount DECIMAL(10, 2),       -- Amount of the sale
+    sale_date DATE,                   -- Date of the sale
+    FOREIGN KEY (salesperson_id) REFERENCES SalesPerson(id) -- Foreign key constraint
+);
+Step 3: Insert Sample Data
+Now, insert the data into both tables:
+
+sql
+Copy code
+-- Insert sample data into SalesPerson table
+INSERT INTO SalesPerson (id, name) VALUES
+(1, 'Alice'),
+(2, 'Bob'),
+(3, 'Charlie');
+
+-- Insert sample data into Sales table (with salesperson_id)
+INSERT INTO Sales (id, salesperson_id, sale_amount, sale_date) VALUES
+(1, 1, 5000.00, '2023-07-01'),  -- Alice's sale in July
+(2, 1, 7000.00, '2023-08-01'),  -- Alice's sale in August
+(3, 2, 9000.00, '2023-08-01'),  -- Bob's sale in August
+(4, 3, 3000.00, '2023-09-01'),  -- Charlie's sale in September
+(5, 2, 15000.00, '2023-07-01'); -- Bob's sale in July
+Step 4: Run the Query to Find the Salesperson with the Highest Sales
+Finally, execute the query to find the highest sales for any salesperson in a single month:
+
+sql
+Copy code
+-- Query to find the salesperson with the highest sales in any single month
+-- Query to find the salesperson with the highest sales in any single month
+SELECT sp.name AS salesperson_name,
+       strftime('%Y', s.sale_date) AS sale_year,        -- Extract year
+       strftime('%m', s.sale_date) AS sale_month,       -- Extract month
+       SUM(s.sale_amount) AS total_sales
+FROM Sales s
+JOIN SalesPerson sp ON s.salesperson_id = sp.id
+GROUP BY sp.name, sale_year, sale_month
+ORDER BY total_sales DESC
+LIMIT 1;  -- Get the top record with the highest total sales
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////4
+Q4)
+To derive revenues by region and rank the regions from highest to lowest while also calculating the percentage of total revenue for each region, you can use the following SQL queries:
+
+Query 1: Revenue by Region with Percentage Calculation
+This query calculates the total revenue for each region and the percentage of total revenue contributed by each region.
+
+SELECT Region, 
+       SUM(Revenue) AS TotalRevenue,
+       (SUM(Revenue) / (SELECT SUM(Revenue) FROM Sales)) * 100 AS Percentage
+FROM Sales
+GROUP BY Region
+ORDER BY TotalRevenue DESC;
+
+
+
+Explanation of the First Query:
+SUM(Revenue): Calculates the total revenue for each region.
+(SUM(Revenue) / (SELECT SUM(Revenue) FROM Sales)) * 100: Calculates the percentage of total revenue for each region.
+GROUP BY Region: Groups the results by region.
+ORDER BY TotalRevenue DESC: Orders the results in descending order of total revenue.
+Query 2: Ranking Regions Using RANK() Over Partition
+This query ranks the regions based on total revenue.
+
+sql
+Copy code
+SELECT Region, 
+       SUM(Revenue) AS TotalRevenue,
+       RANK() OVER (ORDER BY SUM(Revenue) DESC) AS RevenueRank
+FROM Sales
+GROUP BY Region
+ORDER BY RevenueRank;
+
+
+
+Explanation of the Second Query:
+SUM(Revenue): Again calculates the total revenue for each region.
+RANK() OVER (ORDER BY SUM(Revenue) DESC): Assigns a rank to each region based on the total revenue in descending order. Regions with the same total revenue will receive the same rank.
+GROUP BY Region: Groups the results by region.
+ORDER BY RevenueRank: Orders the final output based on the ranking.
