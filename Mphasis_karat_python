@@ -174,3 +174,42 @@ for line in url_data.splitlines():
     if url:  # Ensure the line isn't empty
         main_url, domain_name = extract_main_url_and_domain(url)
         print(f'{main_url}\t{domain_name}')
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+import requests
+
+# Function to extract the main URL and domain name using basic string manipulation
+def extract_main_url_and_domain(url):
+    # Remove protocol (http:// or https://)
+    if url.startswith("http://"):
+        url = url[7:]  # Remove the first 7 characters (http://)
+    elif url.startswith("https://"):
+        url = url[8:]  # Remove the first 8 characters (https://)
+
+    # Split the URL to extract the domain and other parts
+    domain_parts = url.split('/')[0].split('.')
+
+    # If domain has subdomain, extract main URL and domain
+    if len(domain_parts) > 2:
+        main_url = '.'.join(domain_parts[-3:])
+        domain_name = '.'.join(domain_parts[-2:])
+    else:
+        main_url = '.'.join(domain_parts)
+        domain_name = '.'.join(domain_parts[-2:])
+
+    return main_url, domain_name
+
+# Download the file containing the list of URLs
+url_file = "https://public.karat.io/content/urls2.txt"  # Replace with the actual URL if different
+response = requests.get(url_file)
+url_data = response.text
+
+# Process each line (each URL) and extract the main URL and domain name
+print("Main URL\t\tDomain Name")
+for line in url_data.splitlines():
+    url = line.strip()
+    if url:  # Ensure the line isn't empty
+        main_url, domain_name = extract_main_url_and_domain(url)
+        print(f'{main_url}\t{domain_name}')
