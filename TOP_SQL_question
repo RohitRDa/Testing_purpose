@@ -1,0 +1,169 @@
+Here are some commonly asked advanced SQL questions, along with solutions, focusing on topics like removing duplicates, fetching highest salaries, and other frequently asked concepts in SQL interviews:
+
+Q1. Remove Duplicate Records from a Table
+To remove duplicate rows, we typically use a DELETE statement along with ROW_NUMBER(), CTE, or DISTINCT. Here's one way using ROW_NUMBER():
+
+
+WITH CTE AS (
+    SELECT 
+        ID, 
+        ROW_NUMBER() OVER (PARTITION BY column_name ORDER BY ID) AS row_num
+    FROM 
+        your_table
+)
+DELETE FROM CTE
+WHERE row_num > 1;
+PARTITION BY column_name ensures that rows with the same value in column_name are treated as duplicates.
+Only the first occurrence of each duplicate is retained.
+
+
+Q2. Find the 1st and 2nd Highest Salaries
+You can use LIMIT or ROW_NUMBER() to fetch the highest and second-highest salaries:
+
+a) Find the Highest Salary
+
+SELECT MAX(salary) AS highest_salary
+FROM employees;
+b) Find the Second Highest Salary
+
+SELECT MAX(salary) AS second_highest_salary
+FROM employees
+WHERE salary < (SELECT MAX(salary) FROM employees);
+c) Find the Nth Highest Salary
+If you need the Nth highest salary, ROW_NUMBER() or DENSE_RANK() can be helpful:
+
+
+SELECT salary 
+FROM (
+    SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
+    FROM employees
+) ranked_salaries
+WHERE rank = N;  -- Replace N with 2 for second-highest, 3 for third-highest, etc.
+3. Get Employees Who Earn More Than the Average Salary
+
+SELECT *
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);
+4. Find Common Records Between Two Tables (Intersection)
+To get records common to two tables, you can use INNER JOIN or INTERSECT:
+
+
+SELECT column_name
+FROM table1
+INTERSECT
+SELECT column_name
+FROM table2;
+5. Find Employees Hired in the Last 6 Months
+
+SELECT *
+FROM employees
+WHERE hire_date >= ADD_MONTHS(SYSDATE, -6);
+6. Find Employees with Duplicate Email Addresses
+
+SELECT email, COUNT(*)
+FROM employees
+GROUP BY email
+HAVING COUNT(*) > 1;
+7. Count Total Employees in Each Department
+
+SELECT department, COUNT(*) AS total_employees
+FROM employees
+GROUP BY department;
+8. Get Employee Details Along with their Manager's Details
+
+SELECT e.employee_id, e.first_name, e.last_name, m.first_name AS manager_first_name, m.last_name AS manager_last_name
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.employee_id;
+9. Get the Department with the Highest Number of Employees
+
+SELECT department
+FROM employees
+GROUP BY department
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+10. Find the Employees Who Have No Manager (NULL Values in Manager ID)
+
+SELECT *
+FROM employees
+WHERE manager_id IS NULL;
+11. Get Employees Who Joined Between Two Dates
+
+SELECT *
+FROM employees
+WHERE hire_date BETWEEN '2023-01-01' AND '2023-12-31';
+12. Find Employees Whose Name Starts with 'A'
+
+SELECT *
+FROM employees
+WHERE first_name LIKE 'A%';
+13. Find the Maximum Salary for Each Department
+
+SELECT department, MAX(salary) AS highest_salary
+FROM employees
+GROUP BY department;
+14. Delete Duplicate Rows (Without Using CTE)
+If you don't want to use CTE, here's another way to remove duplicates:
+
+
+DELETE FROM employees
+WHERE rowid NOT IN (
+    SELECT MIN(rowid)
+    FROM employees
+    GROUP BY first_name, last_name, salary
+);
+15. Find the Total Salary Paid by Department
+
+SELECT department, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department;
+16. Update Salary of Employees by 10% Where Salary is Less Than 5000
+
+UPDATE employees
+SET salary = salary * 1.10
+WHERE salary < 5000;
+17. Find Employees Who Work in More Than One Department
+This question assumes a department_employees table for many-to-many relationships.
+
+
+SELECT employee_id, COUNT(department_id) AS department_count
+FROM department_employees
+GROUP BY employee_id
+HAVING COUNT(department_id) > 1;
+18. Rank Employees by Their Salary
+Using RANK() or DENSE_RANK():
+
+
+SELECT employee_id, salary, RANK() OVER (ORDER BY salary DESC) AS salary_rank
+FROM employees;
+19. Get the Department with the Lowest Average Salary
+
+SELECT department
+FROM employees
+GROUP BY department
+ORDER BY AVG(salary)
+LIMIT 1;
+20. Get the Employee with the Longest Tenure
+
+SELECT employee_id, hire_date
+FROM employees
+ORDER BY hire_date ASC
+LIMIT 1;
+21. Count the Number of Employees by Gender
+
+SELECT gender, COUNT(*) AS total_employees
+FROM employees
+GROUP BY gender;
+22. Self Join to Find Employees and their Colleagues in the Same Department
+
+SELECT e1.first_name AS employee, e2.first_name AS colleague
+FROM employees e1
+JOIN employees e2 ON e1.department = e2.department AND e1.employee_id != e2.employee_id;
+23. Get the Last Record in a Table
+This assumes you have a timestamp column or auto-increment ID:
+
+
+SELECT *
+FROM employees
+ORDER BY hire_date DESC
+LIMIT 1;
+These are some of the most commonly asked SQL interview questions, with solutions for various scenarios, from basic SQL queries to more complex ones involving ranking, duplicates, and aggregations.
