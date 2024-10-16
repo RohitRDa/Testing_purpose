@@ -607,3 +607,25 @@ arr = [64, 34, 25, 12, 22, 11, 90]
 sorted_arr = quick_sort(arr)
 print("Sorted array:", sorted_arr)
 
+
+
+Q 23) This approach finds both exact matches and substrings within the list and returns the index where the substring is found.
+
+# Given list and string
+my_list = ['apple', 'banana', 'grape', 'mango', 'pineapple', 'orange']
+search_string = 'ana'
+
+# Initialize a list to store indexes where the string or substring is found
+found_indices = []
+
+# Iterate through the list and check for matches or substrings
+for index, item in enumerate(my_list):
+    if search_string in item:  # Check if the search_string is a substring
+        found_indices.append(index)
+
+# Check if any matches were found
+if found_indices:
+    for idx in found_indices:
+        print(f'The substring "{search_string}" is found in "{my_list[idx]}" at index: {idx}')
+else:
+    print(f'The substring "{search_string}" is not found in the list.')
