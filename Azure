@@ -1,0 +1,161 @@
+1. Azure Fundamentals:
+What is Azure, and what are its key features? Azure is Microsoft's cloud computing platform that provides a wide range of cloud services including computing, analytics, storage, and networking. Key features include:
+
+Scalability: Instantly scale up or down resources.
+Global Reach: Availability across many regions worldwide.
+Cost Efficiency: Pay-as-you-go pricing model.
+Security: Offers advanced security features and compliance standards.
+Integration with Microsoft tools: Works well with Windows Server, Active Directory, and other Microsoft technologies.
+Explain the difference between IaaS, PaaS, and SaaS in Azure.
+
+IaaS (Infrastructure as a Service): Provides virtualized computing resources over the internet (e.g., VMs, storage).
+PaaS (Platform as a Service): Offers hardware and software tools for application development (e.g., Azure App Service).
+SaaS (Software as a Service): Delivers fully managed applications over the internet (e.g., Microsoft 365).
+What is an Azure Resource Group, and how does it help manage resources? A Resource Group is a container that holds related resources like VMs, databases, and storage accounts. It helps in:
+
+Organizing resources logically.
+Applying role-based access control.
+Managing costs by grouping resources for billing purposes.
+Can you explain what an Azure Subscription is? An Azure Subscription is an agreement between a customer and Microsoft to use cloud services and resources. It manages:
+
+Billing: All resources under a subscription are billed together.
+Access Control: Defines which users have access to resources.
+Quota Management: Defines limits for resource usage.
+What are Availability Zones in Azure, and why are they important? Availability Zones are physically separated data centers within an Azure region. They ensure high availability by:
+
+Reducing downtime.
+Protecting against data center failures.
+Supporting SLA for critical applications.
+2. Azure App Service:
+What is Azure App Service, and what are its benefits? Azure App Service is a fully managed platform for building, deploying, and scaling web apps. Benefits include:
+
+Easy deployment and scaling.
+Built-in DevOps features (CI/CD).
+Supports multiple languages (e.g., Python, .NET, Java).
+High availability and security.
+How do you deploy a web application using Azure App Service?
+
+Create an App Service Plan.
+Create a Web App.
+Deploy code using methods like Git, Azure DevOps, or FTP.
+What are App Service Plans? How do you decide which plan to choose? App Service Plans define the region, pricing tier, and capacity for your web app. Plans are chosen based on:
+
+Traffic/Performance needs.
+Number of apps running in the same plan.
+Scaling and availability requirements.
+Explain the process of scaling an Azure App Service. Scaling can be vertical (changing the App Service Plan to a higher tier) or horizontal (increasing the number of instances). This can be done:
+
+Automatically using autoscale rules (based on CPU, memory, etc.).
+Manually from the Azure Portal.
+What is the difference between Web Apps, API Apps, and Mobile Apps in Azure?
+
+Web Apps: Host websites or web applications.
+API Apps: Host RESTful APIs and provide API management features.
+Mobile Apps: Used to build backends for mobile applications with offline sync, push notifications, etc.
+3. Deployment Methods:
+What are the different ways to deploy applications to Azure?
+
+Azure DevOps: CI/CD pipelines.
+GitHub Actions: Automate deployments with GitHub.
+Azure CLI: Command-line interface for resource management.
+FTP, ZIP Deployment: Manual deployment using FTP or ZIP file uploads.
+How do you use Git to deploy code to an Azure Web App?
+
+Configure Git deployment by connecting your Web App to a Git repository.
+Push your code changes to the repository, and Azure will automatically deploy them to the Web App.
+What are Deployment Slots in Azure Web Apps, and how do they work? Deployment slots are live environments (like staging) where you can deploy your app before pushing it to production. This allows:
+
+Zero-downtime deployments.
+Easy rollbacks in case of failures.
+Explain Blue-Green deployment and how it can be implemented in Azure. Blue-Green deployment refers to having two identical environments. The new version is deployed to the Green environment (staging), and after testing, traffic is switched from Blue (production) to Green.
+
+4. Azure CLI & PowerShell:
+What is Azure CLI, and how does it differ from Azure Portal? Azure CLI is a command-line tool to manage Azure resources. It offers automation and scripting capabilities, while the Azure Portal is a graphical interface.
+
+Can you give an example of deploying an app using Azure CLI?
+
+bash
+Copy code
+az webapp create --resource-group MyResourceGroup --plan MyAppServicePlan --name MyWebApp --runtime "PYTHON|3.9"
+How do you automate Azure resource creation using Azure PowerShell? Azure PowerShell cmdlets allow automation of tasks like creating resources, scaling, etc. Example:
+
+powershell
+Copy code
+New-AzResourceGroup -Name MyResourceGroup -Location "East US"
+5. Databases & Storage in Azure:
+What are the different database services offered by Azure?
+
+Azure SQL Database: Managed SQL Server.
+Cosmos DB: NoSQL database.
+Azure Database for MySQL/PostgreSQL: Fully managed databases for MySQL/PostgreSQL.
+How do you integrate an Azure SQL Database with your web application?
+
+Create an Azure SQL Database.
+Retrieve connection strings and integrate them into the web app’s configuration.
+Explain the difference between Azure Blob Storage and Azure File Storage.
+
+Blob Storage: Unstructured object storage for large data (e.g., images, videos).
+File Storage: Managed file shares accessible via SMB protocol.
+How do you secure data in Azure Storage?
+
+Use SAS tokens for secure access.
+Enable encryption at rest (e.g., Azure Storage Encryption).
+6. Azure Networking & Security:
+What is a Virtual Network (VNet) in Azure, and how does it work? A VNet allows Azure resources to securely communicate with each other, the internet, and on-premises networks.
+
+How do you configure load balancing for an Azure Web App? Azure Load Balancer distributes incoming traffic across multiple instances of the web app.
+
+What are Network Security Groups (NSGs), and how do they work? NSGs control inbound and outbound traffic to Azure resources by defining security rules.
+
+Explain Azure Traffic Manager and its use cases. Azure Traffic Manager routes traffic globally to Azure services based on routing rules (e.g., performance, priority, or geography).
+
+How do you configure a custom domain and SSL for an Azure Web App?
+
+Purchase a domain or use an existing one.
+Configure custom domain settings in the Web App.
+Bind an SSL certificate using Azure’s SSL settings.
+7. Monitoring & Management:
+How do you monitor the performance of an Azure Web App? Use Azure Monitor and Application Insights to track metrics like CPU, memory, response times, etc.
+
+What are Azure Application Insights, and how do you use them? Application Insights provide deep monitoring of application performance, exceptions, and request rates. You enable it by configuring it in the App Service or using SDKs.
+
+How do you set up alerts in Azure to monitor resource usage or failures? Use Azure Monitor to create alerts based on metrics (e.g., CPU usage, disk space).
+
+What is Azure Log Analytics, and how can it help in troubleshooting? Log Analytics is a tool to collect and analyze log data from Azure resources. It helps in diagnosing and troubleshooting issues using queries.
+
+8. Identity & Access Management:
+What is Azure Active Directory (AD), and how does it integrate with Azure resources? Azure AD is Microsoft’s identity and access management service that integrates with Azure to manage user access to resources.
+
+How do you implement Role-Based Access Control (RBAC) in Azure? RBAC assigns specific permissions to users based on their roles (e.g., Owner, Contributor).
+
+What are Managed Identities in Azure, and how do they help with security? Managed Identities eliminate the need for developers to manage credentials. Azure takes care of identity management for resources.
+
+9. Azure DevOps & CI/CD:
+What is Azure DevOps, and how does it facilitate continuous integration and delivery? Azure DevOps is a set of tools for planning, developing, testing, and delivering software. It provides CI/CD pipelines, version control, and collaboration tools.
+
+How do you set up a CI/CD pipeline for an Azure Web App?
+
+Use Azure Pipelines to define build and release stages.
+Use triggers for automatic deployments based on code changes.
+What is the difference between Build Pipelines and Release Pipelines in Azure DevOps?
+
+Build Pipelines: Build code and run tests.
+Release Pipelines: Deploy the built code to environments like staging and production.
+How do you automate the deployment of infrastructure using ARM templates or Terraform?
+
+ARM Templates: JSON templates that define Azure resources.
+Terraform: Infrastructure as code tool that allows multi-cloud management, including Azure.
+10. Miscellaneous:
+What are ARM templates in Azure, and how do they work? ARM (Azure Resource Manager) templates define infrastructure as code using JSON to automate resource deployment.
+
+What is Azure Kubernetes Service (AKS), and how do you use it for containerized applications? AKS is a managed Kubernetes service to deploy, scale, and manage containerized applications.
+
+How do you ensure high availability for your applications on Azure?
+
+Use Availability Zones for regional redundancy.
+Implement autoscaling and load balancing.
+What is Azure API Management, and when would you use it? API Management allows you to manage APIs by securing, monitoring, and scaling them. It's used to manage API gateways.
+
+How does autoscaling work in Azure, and what factors should be considered? Autoscaling automatically adjusts the number of instances based on demand. Factors to consider include CPU usage, memory, and custom metrics.
+
+These detailed explanations cover most of the fundamental concepts and advanced features in Azure, helping you prepare for an Azure-related interview.
