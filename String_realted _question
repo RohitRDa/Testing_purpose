@@ -1,0 +1,192 @@
+#Q1 --> Reverse the string inplace and other appoarch also 
+
+def reverse_str(s):
+ #convert the string to list for inplace modification   
+    chars = list(s)
+    left, right = 0, len(chars) - 1
+    while left < right:
+        #swap character
+        chars[left], chars[right] = chars[right], chars[left]
+        left+=1
+        right-=1
+       
+       #back join the list into string 
+    return ''.join(chars)
+
+s='rohit'
+print(reverse_str(s))    #tihor
+
+# or 
+def reverse_str(s):
+    return s[::-1]
+s='rohit dogra'
+print(reverse_str(s)) #argod tihor
+
+def reverse_str(s):
+    reversed_string=''
+    for char in s:
+        reversed_string =char + reversed_string
+    return reversed_string
+s='rohit'
+print(reverse_str(s)) #tihor
+
+
+def reverse_str(s):
+    list_word =s.split()
+    reverse_list_word = list_word[::-1]
+    reversed_str = ' '.join(reverse_list_word)
+    return reversed_str
+    
+    # reversed_list_word = list_word[::-1]
+    # reversed_string = ' '.join(reversed_list_word)
+    # return reversed_string
+s = "Rohit Dogra"
+print(reverse_str(s))  #Dogra Rohit
+
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#Q2 --> write code to lower to uppcase  a given string
+
+def uppercase(s):
+    upcs=''
+    for char in s:
+        if 'a' <= char <='z':
+            upcs += chr(ord(char)-32)
+        else:
+            upcs += char
+    return upcs
+
+s ="rohit dogra"
+print(uppercase(s)) #ROHIT DOGRA
+
+#or
+
+def uppercase(s):
+    return s.upper()
+s ="rohit dogra"
+print(uppercase(s)) #ROHIT DOGRA
+
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#Q3 --> Write code for lower to upper and upper to lower case  a given string
+
+def swap_case(s):
+    chars =list(s)
+    for i in range(len(chars)):
+        char =chars[i]
+        if 'a' <= char <='z':
+            chars[i] = chr(ord(char) - 32)
+        elif 'A' <= char <='Z':
+            chars[i] = chr(ord(char) + 32)
+            
+    return ''.join(chars)
+
+s ="rOHiT dOGra"
+print(swap_case(s)) #ROHIT DOGRA
+
+#or 
+
+def reverse_str_list(s):
+    # chars = list(s)
+    left ,right =0 ,len(s) -1
+    
+    while left < right:
+        s[left],s[right] = s[right] , s[left]
+        left+=1
+        right-=1
+    return s
+
+s=[1,2,3]
+print(reverse_str_list(s))    #tihor
+
+
+def reverse(s):
+    if isinstance(s, str):
+        # Convert string to a list of characters for in-place modification
+        chars = list(s)
+        left, right = 0, len(chars) - 1
+        
+        while left < right:
+            chars[left], chars[right] = chars[right], chars[left]
+            left += 1
+            right -= 1
+        
+        # Join the list back into a string
+        return ''.join(chars)
+    
+    elif isinstance(s, list):
+        left, right = 0, len(s) - 1
+        
+        while left < right:
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
+        
+        return s
+    else:
+        raise TypeError("Input must be either a string or a list")
+
+# Example usage:
+s_list = [1, 2, 3]
+# s_string = "Rohit"
+
+print(reverse(s_list))    # Output: [3, 2, 1]
+# print(reverse(s_string))  # Output: "tihoR"
+
+
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#Q4 --> Write a code  to to find vowel in given string 
+
+def find_vowels(s):
+    vowels = 'aeiouAEIOU'
+    vowel_count=0
+    found_vowels= []
+    for char in s:
+        if char in vowels:
+            vowel_count += 1
+            found_vowels.append(char)
+    return vowel_count,found_vowels
+
+s = 'Rohit Dogra'
+vowel_count, found_vowels =find_vowels(s)
+print(vowel_count,found_vowels) # 4 ['o', 'a', 'i', 'o']
+
+
+# or
+def find_vowel(s):
+    vowels ='aieouAIEOU'
+    found_vowels = [char for char in s if char in vowels]
+    vowels_count = len(found_vowels)
+    return found_vowels, vowel_count
+
+s = 'Rohit Dogra'
+found_vowels,vowel_count = find_vowels(s)
+print(f'vowels found: {found_vowels}')
+print(f'Number of vowels: {vowel_count}')
+
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#Q5) --> This approach finds both exact matches and substrings within the list and returns the index where the substring is found.
+
+def find_substring_indices(lst, search_string):
+    found_indices = []
+    for index, item in enumerate(lst):
+        if search_string in item:
+            found_indices.append(index)
+    return found_indices
+
+# Example usage:
+my_list = ['apple', 'banana', 'grape', 'mango', 'pineapple', 'orange']
+search_string = 'ap'
+indices = find_substring_indices(my_list, search_string)
+
+if indices:
+    for idx in indices:
+        print(f'The substring "{search_string}" is found in "{my_list[idx]}" at index: {idx}')
+else:
+    print(f'The substring "{search_string}" is not found in the list.')
